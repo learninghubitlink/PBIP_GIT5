@@ -1,0 +1,60 @@
+table 'Selector Table - BU'
+	lineageTag: 85d19fd9-cbcf-4ef4-bc1f-2513ca17a740
+
+	column BU_id
+		dataType: string
+		lineageTag: ebda2eea-5fab-49e1-9e3b-38ff9926dc5a
+		summarizeBy: none
+		sourceColumn: BU_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column BU_name
+		dataType: string
+		lineageTag: f5961529-80c0-4a80-ac31-d32370f6b3bb
+		summarizeBy: none
+		sourceColumn: BU_name
+		sortByColumn: Sort
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort
+		dataType: string
+		lineageTag: cb969d7e-7ae7-4b46-bf65-bcd9218add58
+		summarizeBy: none
+		sourceColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Lookup
+		dataType: string
+		lineageTag: 43098b38-1dac-456c-a0b5-d83b05ddb64b
+		summarizeBy: none
+		sourceColumn: Lookup
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Selector Table - BU' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCkotSczMUQgoyk8pTS4pVtKBigAZhkqxOtFKzvm5ualFyZmJOQrBAfrO4UAJLEJGULVFBflFiSWpCk6hYHUoXGN083zcAlBNgwiYgNWFeSroKgR4GJoBRcI8gYQZWNjT0wvIhpCmYBE3R4TCoGAgYa4UGwsA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [BU_id = _t, BU_name = _t, Sort = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"BU_id", type text}, {"BU_name", type text}}),
+				    #"Duplicated Column" = Table.DuplicateColumn(#"Changed Type", "Sort", "Sort - Copy"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Duplicated Column",{{"Sort - Copy", "Lookup"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns","1","Retail",Replacer.ReplaceText,{"Lookup"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","4","FluxJet Corp",Replacer.ReplaceText,{"Lookup"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","6","Vistara VI",Replacer.ReplaceText,{"Lookup"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","5","Inkline IIJ",Replacer.ReplaceText,{"Lookup"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","7","F6 - BH15",Replacer.ReplaceText,{"Lookup"}),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Replaced Value4","3","VLAX BU",Replacer.ReplaceText,{"Lookup"}),
+				    #"Replaced Value6" = Table.ReplaceValue(#"Replaced Value5","2","SML SP/CK",Replacer.ReplaceText,{"Lookup"})
+				in
+				    #"Replaced Value6"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

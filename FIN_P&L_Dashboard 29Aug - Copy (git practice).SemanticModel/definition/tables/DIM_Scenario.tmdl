@@ -1,0 +1,25 @@
+table DIM_Scenario
+	lineageTag: 19f9a0f1-7b9b-4141-927d-b6f74db0aa6d
+
+	column Scenario
+		dataType: string
+		lineageTag: 3d33cd0c-434a-42b4-9691-be9ea39ff113
+		summarizeBy: none
+		sourceColumn: Scenario
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Scenario = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    DIM_Scenario_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="DIM_Scenario",version=""]}[Data]
+				in
+				    DIM_Scenario_
+
+	annotation PBI_ResultType = Table
+

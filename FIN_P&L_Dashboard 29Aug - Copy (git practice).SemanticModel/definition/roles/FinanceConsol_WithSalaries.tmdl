@@ -1,0 +1,9 @@
+role FinanceConsol_WithSalaries
+	modelPermission: read
+
+	tablePermission DIM_Country = [Country] == "Finance Consol Without EPIL"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "Finance Consol Without EPIL"
+
+	annotation PBI_Id = 6abe75374393430c88d3367a53b45aaf
+

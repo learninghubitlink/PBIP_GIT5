@@ -1,0 +1,247 @@
+table 'DIM_Country & Alias - Ordering (New)'
+	lineageTag: a452e10a-5762-4775-8228-744bc7a424f8
+
+	column Country
+		dataType: string
+		lineageTag: a9b0ac2c-b24f-4aa2-b541-9f965b8f1c1f
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alias
+		dataType: string
+		lineageTag: 838dec70-e174-446c-bbbf-f82088b6e106
+		summarizeBy: none
+		sourceColumn: Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Overview Slicer'
+		dataType: string
+		lineageTag: 10ed378c-fcb2-4450-940f-953a47a923f2
+		summarizeBy: none
+		sourceColumn: Overview Slicer
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Overview Slicer Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 55dd059a-b75b-4ab4-b0a9-bf398295b729
+		summarizeBy: sum
+		sourceColumn: Overview Slicer Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BP Alias'
+		dataType: string
+		lineageTag: 774c5777-9499-4801-97df-f6650d9c1ff9
+		summarizeBy: none
+		sourceColumn: BP Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BP Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: bcb8ade6-0057-4b35-b468-fa3f64a6dda7
+		summarizeBy: sum
+		sourceColumn: BP Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scorecard Alias'
+		dataType: string
+		lineageTag: 2227c5b6-416c-43f3-acb2-0f58cdb5c282
+		summarizeBy: none
+		sourceColumn: Scorecard Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scorecard Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c56595a-29f7-4333-90e7-a19ce5ae8918
+		summarizeBy: sum
+		sourceColumn: Scorecard Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Analysis - Sales Achievement Bar Alias'
+		dataType: string
+		lineageTag: e95bd2e6-8295-4799-a2a9-b5027e1276be
+		summarizeBy: none
+		sourceColumn: Sales Analysis - Sales Achievement Bar Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Analysis - Sales Achievement Bar Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: eb763f59-6dff-4ae7-8af0-21a19fd4648c
+		summarizeBy: sum
+		sourceColumn: Sales Analysis - Sales Achievement Bar Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BPD Pg ESC Slicer'
+		dataType: string
+		lineageTag: 659d54ff-530e-4a96-a6aa-7cae88935792
+		summarizeBy: none
+		sourceColumn: BPD Pg ESC Slicer
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BPD Pg ESC Slicer Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: dd3f0818-08e8-4cf7-9426-09c39f1b81f6
+		summarizeBy: sum
+		sourceColumn: BPD Pg ESC Slicer Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RevenueByESC Bar&Table'
+		dataType: string
+		lineageTag: f33f2413-ea80-4d05-98d5-dffe0d473848
+		summarizeBy: none
+		sourceColumn: RevenueByESC Bar&Table
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RevenueByESC Bar&Table Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: b9240a94-2e3b-4a57-a90d-7bd37893fa32
+		summarizeBy: sum
+		sourceColumn: RevenueByESC Bar&Table Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SalesMinus & Tactical Table Alias'
+		dataType: string
+		lineageTag: 4c950112-8bfd-4bb8-99b2-cf3b2ec86c4e
+		summarizeBy: none
+		sourceColumn: SalesMinus & Tactical Table Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SalesMinus & Tactical Table Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1126ce29-81f2-40e3-abff-3fd5fb935c2e
+		summarizeBy: sum
+		sourceColumn: SalesMinus & Tactical Table Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGA Overview&Breakdown Slicer'
+		dataType: string
+		lineageTag: 99da6e01-394f-4984-ba7f-ed8a41ce2a4e
+		summarizeBy: none
+		sourceColumn: SGA Overview&Breakdown Slicer
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGA Overview&Breakdown Slicer Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: ad57fc8a-bc37-4c3d-b668-1a2a6d752aea
+		summarizeBy: sum
+		sourceColumn: SGA Overview&Breakdown Slicer Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CompanyScorecard BP Table'
+		dataType: string
+		lineageTag: 27ded806-bbe0-4c09-943c-aff05357275a
+		summarizeBy: none
+		sourceColumn: CompanyScorecard BP Table
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CompanyScorecard BP Table Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 75e4ec92-5c85-4c06-8c17-7b9a902b527f
+		summarizeBy: sum
+		sourceColumn: CompanyScorecard BP Table Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Inventory
+		dataType: string
+		lineageTag: b0282655-6b11-400c-a828-45a0d84f4da8
+		summarizeBy: none
+		sourceColumn: Inventory
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inventory Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 962ddfd6-45c3-45b1-bbfa-eaeb98a35c06
+		summarizeBy: sum
+		sourceColumn: Inventory Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGA General'
+		dataType: string
+		lineageTag: 6d538af6-c6d9-4698-9a0b-c8ae306a6cda
+		summarizeBy: none
+		sourceColumn: SGA General
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGA General Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 36b2a683-f5fe-4e75-a8f9-87a17e27ac2c
+		summarizeBy: sum
+		sourceColumn: SGA General Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scorecard - Alias'
+		dataType: string
+		lineageTag: e7e3b93f-9b42-4302-b3b1-bfe1ee01b095
+		summarizeBy: none
+		sourceColumn: Scorecard - Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scorecard - Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 287063d6-82b8-4444-a0d3-045c34747e30
+		summarizeBy: sum
+		sourceColumn: Scorecard - Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Countries
+		dataType: string
+		lineageTag: 29b2eb0f-0509-45c7-83f0-d2d93674f2a2
+		summarizeBy: none
+		sourceColumn: Countries
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_Country & Alias - Ordering (New)' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\intern1\Downloads\DIM_Country - Alias & Ordering .xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Country", type text}, {"Alias", type text}, {"Overview Slicer", type text}, {"Overview Slicer Sort", Int64.Type}, {"BP Alias", type text}, {"BP Sort", Int64.Type}, {"Scorecard Alias", type text}, {"Scorecard Sort", Int64.Type}, {"Sales Analysis - Sales Achievement Bar Alias", type text}, {"Sales Analysis - Sales Achievement Bar Sort", Int64.Type}, {"BPD Pg ESC Slicer", type text}, {"BPD Pg ESC Slicer Sort", Int64.Type}, {"RevenueByESC Bar&Table", type text}, {"RevenueByESC Bar&Table Sort", Int64.Type}, {"SalesMinus & Tactical Table Alias", type text}, {"SalesMinus & Tactical Table Sort", Int64.Type}, {"SGA Overview&Breakdown Slicer", type text}, {"SGA Overview&Breakdown Slicer Sort", Int64.Type}, {"CompanyScorecard BP Table", type text}, {"CompanyScorecard BP Table Sort", Int64.Type}, {"Inventory", type text}, {"Inventory Sort", Int64.Type}, {"SGA General", type text}, {"SGA General Sort", Int64.Type}, {"Scorecard - Alias", type text}, {"Scorecard - Sort", Int64.Type}, {"Lookup", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Lookup", "Countries"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

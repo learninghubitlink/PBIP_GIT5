@@ -1,0 +1,41 @@
+table 'HIER_ProfitCenter (Inventory)'
+	lineageTag: 7a10d352-5a69-4806-98bf-0801be36335f
+
+	column BU_id
+		dataType: string
+		lineageTag: b54150f4-9255-45ea-8cd2-ae44caf01137
+		summarizeBy: none
+		sourceColumn: BU_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hier_L1
+		dataType: string
+		lineageTag: 50f7532b-2350-4509-b2e3-82bfacad58a1
+		summarizeBy: none
+		sourceColumn: Hier_L1
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter
+		dataType: string
+		lineageTag: 313dbb1f-2b3a-4f44-8a12-828e9883a6b5
+		summarizeBy: none
+		sourceColumn: ProfitCenter
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'HIER_ProfitCenter (Inventory)' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"1752833e-3977-423a-bce6-264afe353810" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"3bab4f99-3060-49c4-b9fc-27bcab372d7b" = #"1752833e-3977-423a-bce6-264afe353810"{[dataflowId="3bab4f99-3060-49c4-b9fc-27bcab372d7b"]}[Data],
+				    #"SCM Product Category Mapping_" = #"3bab4f99-3060-49c4-b9fc-27bcab372d7b"{[entity="SCM Product Category Mapping",version=""]}[Data]
+				in
+				    #"SCM Product Category Mapping_"
+
+	annotation PBI_ResultType = Table
+

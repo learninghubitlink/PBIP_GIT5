@@ -1,0 +1,9 @@
+role EVNL_WithSalaries
+	modelPermission: read
+
+	tablePermission DIM_Country = [Country] == "ESP-EVNL" || [Country] == "EVNL"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "Total EVNL" || [Country] == "EVNL Total"
+
+	annotation PBI_Id = c221338f9a08461ca6e82499999708d5
+

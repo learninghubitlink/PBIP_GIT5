@@ -1,0 +1,41 @@
+table HIER_SgaAccount
+	lineageTag: 6201568e-14d9-402b-afa1-8a665d717b06
+
+	column 'ECAS Account L1'
+		dataType: string
+		lineageTag: 9ae4e442-0b25-49e4-ba71-a6c9d2c15761
+		summarizeBy: none
+		sourceColumn: ECAS Account L1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ECAS Account L0'
+		dataType: string
+		lineageTag: 8802ebdf-b01e-4dfa-a60c-00df01d97397
+		summarizeBy: none
+		sourceColumn: ECAS Account L0
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 5bb43dd4-415d-4c68-b288-c3058ed4760a
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition HIER_SgaAccount = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"1752833e-3977-423a-bce6-264afe353810" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"3bab4f99-3060-49c4-b9fc-27bcab372d7b" = #"1752833e-3977-423a-bce6-264afe353810"{[dataflowId="3bab4f99-3060-49c4-b9fc-27bcab372d7b"]}[Data],
+				    #"SGA Hierarchy_" = #"3bab4f99-3060-49c4-b9fc-27bcab372d7b"{[entity="SGA Hierarchy",version=""]}[Data]
+				in
+				    #"SGA Hierarchy_"
+
+	annotation PBI_ResultType = Table
+

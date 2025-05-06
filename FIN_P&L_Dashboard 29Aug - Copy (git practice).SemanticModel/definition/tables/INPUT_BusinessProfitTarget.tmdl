@@ -1,0 +1,96 @@
+table INPUT_BusinessProfitTarget
+	lineageTag: 67bb6fe7-d775-41ff-9125-7fe51b26b25b
+
+	column ESCs
+		dataType: string
+		lineageTag: 21ed69f3-f110-47bb-84cc-5d320eddf9f6
+		summarizeBy: none
+		sourceColumn: ESCs
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Lower Quartile Target Business Profit %'
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 9c974367-8502-4218-87ab-c7dc1a6a1565
+		summarizeBy: sum
+		sourceColumn: Lower Quartile Target Business Profit %
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Upper Quartile Target Business Profit %'
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 775316e8-b9d6-488d-b03b-2a1166652f16
+		summarizeBy: sum
+		sourceColumn: Upper Quartile Target Business Profit %
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target Business Profit'
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: b4517fdb-ee59-4cff-914b-6cd044ec8325
+		summarizeBy: sum
+		sourceColumn: Target Business Profit
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY
+		dataType: int64
+		formatString: 0
+		lineageTag: 08bf8cf0-ecde-4a74-80d9-f53bcfc1d2be
+		summarizeBy: sum
+		sourceColumn: FY
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: c9cbcea3-16b9-4634-b1f5-7cd822df3fd0
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FY Year Month'
+		dataType: dateTime
+		formatString: Mmm yyyy
+		lineageTag: 303aaf0f-2b9f-4c95-9b6d-6fdb6e35cd52
+		summarizeBy: none
+		sourceColumn: FY Year Month
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	partition INPUT_BusinessProfitTarget = m
+		mode: import
+		source =
+				// let
+				//     Source = PowerPlatform.Dataflows(null),
+				//     Workspaces = Source{[Id="Workspaces"]}[Data],
+				//     #"1752833e-3977-423a-bce6-264afe353810" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				//     #"3bab4f99-3060-49c4-b9fc-27bcab372d7b" = #"1752833e-3977-423a-bce6-264afe353810"{[dataflowId="3bab4f99-3060-49c4-b9fc-27bcab372d7b"]}[Data],
+				//     #"Business Profit Target_For UAT_" = #"3bab4f99-3060-49c4-b9fc-27bcab372d7b"{[entity="Business Profit Target_For UAT",version=""]}[Data]
+				// in
+				//     #"Business Profit Target_For UAT_"
+				
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"1752833e-3977-423a-bce6-264afe353810" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"3bab4f99-3060-49c4-b9fc-27bcab372d7b" = #"1752833e-3977-423a-bce6-264afe353810"{[dataflowId="3bab4f99-3060-49c4-b9fc-27bcab372d7b"]}[Data],
+				    #"Business Profit Target_" = #"3bab4f99-3060-49c4-b9fc-27bcab372d7b"{[entity="Business Profit Target",version=""]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"Business Profit Target_",{{"ESCs", type text}, {"FY", Int64.Type}, {"Month", type text}, {"Lower Quartile Target Business Profit %", type number}, {"Upper Quartile Target Business Profit %", type number}, {"Target Business Profit", type number}}),
+				    #"Inserted Merged Column" = Table.AddColumn(#"Changed Type", "Merged", each Text.Combine({[Month], " ", Text.From([FY], "en-US")}), type text),
+				    #"Renamed Columns" = Table.RenameColumns(#"Inserted Merged Column",{{"Merged", "FY Year Month"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

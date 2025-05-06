@@ -1,0 +1,54 @@
+table 'SgaAccount Parameter'
+	lineageTag: 3b03b945-2e4c-41e5-9831-fd0a699ea949
+
+	column 'SgaAccount Parameter'
+		lineageTag: 9e73d70a-f4f4-4822-b920-70a5f51544b3
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'SgaAccount Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'SgaAccount Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SgaAccount Parameter Fields'
+		isHidden
+		lineageTag: 46e51a36-76e4-421b-a135-3542625dbb4d
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'SgaAccount Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SgaAccount Parameter Order'
+		isHidden
+		formatString: 0
+		lineageTag: 6b9dd590-92b6-4c82-8484-0d1ff4d94c8d
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'SgaAccount Parameter' = calculated
+		mode: import
+		source =
+				{
+				    ("CONSOL", NAMEOF('Measures Table'[SgaAccount_Selector_LineGraph_CONSOL]), 0),
+				    ("Indonesia", NAMEOF('Measures Table'[SgaAccount_Selector_LineGraph_EINIDR]), 1),
+				    ("Malaysia", NAMEOF('Measures Table'[SgaAccount_Selector_LineGraph_EMSB]), 2),
+				    ("Philippines", NAMEOF('Measures Table'[SgaAccount_Selector_LineGraph_EPC]), 3),
+				    ("Denmark", NAMEOF('Measures Table'[SgaAccount_Selector_LineGraph_ESD]), 4),
+				    ("China", NAMEOF('Measures Table'[SgaAccount_Selector_LineGraph_ESP]), 5),
+				    ("USA", NAMEOF('Measures Table'[SgaAccount_Selector_LineGraph_ETH]), 6),
+				    ("New Zealand", NAMEOF('Measures Table'[SgaAccount_Selector_LineGraph_EVNL]), 7)
+				}
+
+	annotation PBI_Id = 20aa41a3fdb84b1d9ce72622bd49b51a
+

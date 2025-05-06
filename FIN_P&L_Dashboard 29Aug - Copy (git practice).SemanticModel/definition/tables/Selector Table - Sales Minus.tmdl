@@ -1,0 +1,22 @@
+table 'Selector Table - Sales Minus'
+	lineageTag: ee2fcbff-892e-4d38-b29a-a5de1433cb78
+
+	column Breakdown
+		dataType: string
+		lineageTag: c53c5cc4-c27d-4d2f-bc02-a4f23555548d
+		summarizeBy: none
+		sourceColumn: Breakdown
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Selector Table - Sales Minus' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCskvScxRCE7MSS1W8M3MKy1WUFWK1YlWMiwuUQjJTC1SCEpNSixJhYoa5aVgEXXJLE7OL80rgXIDijKTUxUCivJLUpNLMvPzQMKxAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Breakdown = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Breakdown", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

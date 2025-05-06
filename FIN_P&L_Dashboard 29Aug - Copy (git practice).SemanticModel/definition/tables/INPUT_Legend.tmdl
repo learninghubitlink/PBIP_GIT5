@@ -1,0 +1,76 @@
+table INPUT_Legend
+	lineageTag: e927b1f7-f601-4dff-8de5-946d2a4f6deb
+
+	column Legend
+		dataType: string
+		lineageTag: 0994d181-c493-4eed-bbc5-fc8a7e145111
+		summarizeBy: none
+		sourceColumn: Legend
+		sortByColumn: Sort
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales
+		dataType: string
+		lineageTag: 60170b1f-0d07-4f2c-b239-6a80fc4dbba9
+		summarizeBy: none
+		sourceColumn: Sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column SGA
+		dataType: string
+		lineageTag: 11b4edb7-e04c-41e9-a002-9129ca325166
+		summarizeBy: none
+		sourceColumn: SGA
+
+		annotation SummarizationSetBy = Automatic
+
+	column Inventory
+		dataType: string
+		lineageTag: 83a13411-463c-4d95-be53-2b9ee57423ab
+		summarizeBy: none
+		sourceColumn: Inventory
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Business Profit'
+		dataType: string
+		lineageTag: 9a43d460-1b75-4794-9776-94138fd81df6
+		summarizeBy: none
+		sourceColumn: Business Profit
+
+		annotation SummarizationSetBy = Automatic
+
+	column A&P
+		dataType: string
+		lineageTag: 55e9f819-721c-43eb-88b1-adca149bf5c4
+		summarizeBy: none
+		sourceColumn: A&P
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort
+		dataType: string
+		lineageTag: 2e3467a4-0389-44bd-ae82-608dd149e392
+		summarizeBy: none
+		sourceColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	partition INPUT_Legend = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"1752833e-3977-423a-bce6-264afe353810" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"3bab4f99-3060-49c4-b9fc-27bcab372d7b" = #"1752833e-3977-423a-bce6-264afe353810"{[dataflowId="3bab4f99-3060-49c4-b9fc-27bcab372d7b"]}[Data],
+				    INPUT_Legend_ = #"3bab4f99-3060-49c4-b9fc-27bcab372d7b"{[entity="INPUT_Legend",version=""]}[Data]
+				in
+				    INPUT_Legend_
+
+	annotation PBI_ResultType = Table
+

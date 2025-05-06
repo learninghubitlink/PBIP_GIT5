@@ -1,0 +1,61 @@
+table 'SGARatio Parameter (New)'
+	lineageTag: 98872888-967a-46a3-a4ba-177ed140dd92
+
+	column 'SGARatio Parameter'
+		dataType: string
+		lineageTag: 26854d2f-3408-4910-b22c-2d89eed142a7
+		summarizeBy: none
+		sourceColumn: SGARatio Parameter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGARatio Parameter Fields'
+		dataType: string
+		lineageTag: 723f2013-6dd2-4ae1-9aaa-c152333ab0d1
+		summarizeBy: none
+		sourceColumn: SGARatio Parameter Fields
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGARatio Parameter Order'
+		dataType: int64
+		formatString: 0
+		lineageTag: 046cce4c-9fe4-4cfb-ac16-b3af19c854e4
+		summarizeBy: sum
+		sourceColumn: SGARatio Parameter Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 2213095a-5273-487e-b9bc-dcdbcea60c6b
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Countries
+		dataType: string
+		lineageTag: efe8c328-2d21-4ee1-8095-5096884f35b4
+		summarizeBy: none
+		sourceColumn: Countries
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'SGARatio Parameter (New)' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\intern1\Downloads\SGARatio Parameter.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"SGARatio Parameter", type text}, {"SGARatio Parameter Fields", type text}, {"SGARatio Parameter Order", Int64.Type}, {"Country", type text}, {"Countries", type text}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","EIN","Indonesia",Replacer.ReplaceText,{"SGARatio Parameter"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","Indonesia","EIN",Replacer.ReplaceText,{"SGARatio Parameter"})
+				in
+				    #"Replaced Value1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

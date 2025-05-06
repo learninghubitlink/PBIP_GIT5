@@ -1,0 +1,31 @@
+table SelectorTable
+	lineageTag: f9130ae7-c84b-4590-9f3e-6e87364147f1
+
+	column SelectorNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: dd52952e-3de5-4b94-9e69-0dfe989409d1
+		summarizeBy: sum
+		sourceColumn: SelectorNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column Selector
+		dataType: string
+		lineageTag: 5c14e3a5-b673-4677-99a7-669b94b7df72
+		summarizeBy: none
+		sourceColumn: Selector
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SelectorTable = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUfLNzyvJUIrViVYyAvIiQ1yUYmMB", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [SelectorNumber = _t, Selector = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"SelectorNumber", Int64.Type}, {"Selector", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

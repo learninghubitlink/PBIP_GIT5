@@ -1,0 +1,181 @@
+table FACT_Inventory
+	lineageTag: 185bbb9e-3070-4901-91f6-eb918fb9dda2
+
+	column YYYYMM
+		dataType: int64
+		formatString: 0
+		lineageTag: 2da6098d-4d09-4c03-9935-6ce2f7b992d4
+		summarizeBy: sum
+		sourceColumn: YYYYMM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ed5f91d9-bf9f-4e34-b0eb-3ea8b49dc92e
+		summarizeBy: none
+		sourceColumn: MONTH
+
+		variation Variation
+			isDefault
+			relationship: c56daca0-2c07-4bb9-82a3-d13b7a53d910
+			defaultHierarchy: LocalDateTable_5d03abd5-5f5f-4be4-86d4-fad0a9308997.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Plant
+		dataType: string
+		lineageTag: b8d921fa-5304-4f63-891a-46338a2423e1
+		summarizeBy: none
+		sourceColumn: Plant
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter
+		dataType: string
+		lineageTag: d349ec2c-2206-4ff3-a6fd-d3b8bad96c88
+		summarizeBy: none
+		sourceColumn: ProfitCenter
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOADDATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 14bd4ef1-749f-4e0c-ac80-e48cce6d026e
+		summarizeBy: none
+		sourceColumn: LOADDATE
+
+		variation Variation
+			isDefault
+			relationship: 65eba377-19bc-41cc-b33f-c47691616228
+			defaultHierarchy: LocalDateTable_3d6c787d-dcf9-4763-8fb5-e16e2e3cb785.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 474dda61-dd26-451a-bfcc-ce3f4852ce11
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: 3126b354-e697-44dc-ba26-3eeb51f69144
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACT_EXRATE_SGD
+		dataType: double
+		lineageTag: 5cbf2f2d-c0ff-4e66-98f8-31f5b240a2f4
+		summarizeBy: sum
+		sourceColumn: ACT_EXRATE_SGD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BP_EXRATE_SGD
+		dataType: double
+		lineageTag: 82d6dc82-9f2f-4ec7-a8ee-c6d43af95ece
+		summarizeBy: sum
+		sourceColumn: BP_EXRATE_SGD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CATEGORY
+		dataType: string
+		lineageTag: 4c0e629f-0cb5-4817-8703-bdeeef5b91fd
+		summarizeBy: none
+		sourceColumn: CATEGORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column Division
+		dataType: string
+		lineageTag: 30a0ceba-27b1-414b-83cc-d1726de6e5f3
+		summarizeBy: none
+		sourceColumn: Division
+
+		annotation SummarizationSetBy = Automatic
+
+	column Exclude_SKU_Remarks
+		dataType: string
+		lineageTag: a96d8d63-8f8c-4b2f-b216-88b222e78360
+		summarizeBy: none
+		sourceColumn: Exclude_SKU_Remarks
+
+		annotation SummarizationSetBy = Automatic
+
+	column Exclude_SKU_Filter
+		dataType: string
+		lineageTag: 941663b8-268d-4b9d-89b7-68bcb492322e
+		summarizeBy: none
+		sourceColumn: Exclude_SKU_Filter
+
+		annotation SummarizationSetBy = Automatic
+
+	column SMS
+		dataType: string
+		lineageTag: b0eaa45b-f819-4c94-8cb1-35250b6a6256
+		summarizeBy: none
+		sourceColumn: SMS
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		dataType: dateTime
+		formatString: Mmm yyyy
+		lineageTag: 0bca20ec-afb1-41c0-9e00-e30ab8ea5f3f
+		summarizeBy: none
+		sourceColumn: Year Month
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column Quantity
+		dataType: double
+		lineageTag: c98c4264-ddf8-4e5d-8b29-10929aaf3b58
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Value
+		dataType: double
+		lineageTag: b2f0cb24-25b9-40e8-8a82-ce9d80f94167
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FACT_Inventory = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"1752833e-3977-423a-bce6-264afe353810" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"3bab4f99-3060-49c4-b9fc-27bcab372d7b" = #"1752833e-3977-423a-bce6-264afe353810"{[dataflowId="3bab4f99-3060-49c4-b9fc-27bcab372d7b"]}[Data],
+				    #"FACT_Inventory (2)_" = #"3bab4f99-3060-49c4-b9fc-27bcab372d7b"{[entity="FACT_Inventory (2)",version=""]}[Data]
+				in
+				    #"FACT_Inventory (2)_"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,25 @@
+table DIM_Country
+	lineageTag: 5c5ad8e5-cadc-487a-9abd-d6133430dbc1
+
+	column Country
+		dataType: string
+		lineageTag: 23d50e1a-4267-46f9-9da2-63579e82d714
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Country = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    DIM_Country_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="DIM_Country",version=""]}[Data]
+				in
+				    DIM_Country_
+
+	annotation PBI_ResultType = Table
+

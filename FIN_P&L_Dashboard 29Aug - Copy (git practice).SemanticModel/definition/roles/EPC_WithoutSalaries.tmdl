@@ -1,0 +1,15 @@
+role EPC_WithoutSalaries
+	modelPermission: read
+
+	tablePermission DIM_Account = [Account] <> "E00000" && [Account] <> "E00100" && [Account] <> "E00110" && [Account] <> "E00200" && [Account] <> "E00010" && [Account] <> "E00020" && [Account] <> "E00030"
+
+	tablePermission DIM_Country = [Country] == "EPC"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "EPC"
+
+	tablePermission FACT_Consol = [Account] <> "Salaries"
+
+	tablePermission HIER_SgaAccount = [ECAS Account L1] <> "Salaries"
+
+	annotation PBI_Id = 453f063faae94add9e0a6019e0738388
+

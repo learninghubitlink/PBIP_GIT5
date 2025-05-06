@@ -1,0 +1,51 @@
+table 'HIER_SgaAccount (New)'
+	lineageTag: 3fa1755f-8e54-4b38-960e-d331ba33e1c0
+
+	column 'ECAS Account L1'
+		dataType: string
+		lineageTag: d37994db-0849-4a71-9630-094f34ff8301
+		summarizeBy: none
+		sourceColumn: ECAS Account L1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ECAS Account L0'
+		dataType: string
+		lineageTag: e5016e1a-d2b2-4fdf-bdbb-4968fbfa78a7
+		summarizeBy: none
+		sourceColumn: ECAS Account L0
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: cedbcb95-b51e-4b49-bd5b-efd2be5915f4
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account
+		dataType: string
+		lineageTag: ef2f8a37-8f1d-4e17-8db3-1d5f34a3db2a
+		summarizeBy: none
+		sourceColumn: Account
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'HIER_SgaAccount (New)' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\intern1\Downloads\HIER_SgaAccount.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Sheet1_Sheet,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Column1", "ECAS Account L1"}, {"Column2", "ECAS Account L0"}, {"Column3", "Description"}, {"Column4", "Account"}}),
+				    #"Removed Top Rows" = Table.Skip(#"Renamed Columns",1)
+				in
+				    #"Removed Top Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

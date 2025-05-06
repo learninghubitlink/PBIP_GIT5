@@ -1,0 +1,5 @@
+role AllESC_WithSalaries
+	modelPermission: read
+
+	annotation PBI_Id = 439aa8c82867455fbc1eda610c766b07
+

@@ -1,0 +1,33 @@
+table 'Selector Table - Tactical'
+	lineageTag: d4c4f04f-9a90-4747-9164-6be8bcc98396
+
+	column Tactical
+		dataType: string
+		lineageTag: 4f740c44-3972-49c2-afe5-4d28cb076cc6
+		summarizeBy: none
+		sourceColumn: Tactical
+		sortByColumn: Sort
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort
+		dataType: string
+		lineageTag: ab3cf20a-528f-4eb6-bce1-3bfb6cd8c8c3
+		summarizeBy: none
+		sourceColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Selector Table - Tactical' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCskvScxRCElMLslMTsxR0lEyVIrViVYyLC5RCMlMLUKWMQLLGOWlYMgYK8XGAgA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Tactical = _t, Sort = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Tactical", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,178 @@
+table 'DIM_ProfitCenter - Alias & Ordering (New)'
+	lineageTag: 9ea07466-285a-49ed-84d4-8e47cd1be0b0
+
+	column ProfitCenter
+		dataType: string
+		lineageTag: eb1a9567-8f4a-43bc-b656-6ead1249f34d
+		summarizeBy: none
+		sourceColumn: ProfitCenter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BI name'
+		dataType: string
+		lineageTag: a7c0d816-795c-46bc-b124-f6ed194a3000
+		summarizeBy: none
+		sourceColumn: BI name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Overview - Alias'
+		dataType: string
+		lineageTag: af7ad7ef-6072-46a7-9fb1-c6b84e905fbd
+		summarizeBy: none
+		sourceColumn: Overview - Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Overview - Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 24c036ad-4264-4954-b8b4-f9d0e6db071f
+		summarizeBy: sum
+		sourceColumn: Overview - Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SalesByESC(Hari) - Alias'
+		dataType: string
+		lineageTag: a3d27acb-3ff0-414a-abf7-f39d2ff2007a
+		summarizeBy: none
+		sourceColumn: SalesByESC(Hari) - Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SalesByESC(Hari) - Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: dc363fb4-ab9d-4913-8476-0b0a49855c5e
+		summarizeBy: sum
+		sourceColumn: SalesByESC(Hari) - Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SalesByESC(Meri) - Alias'
+		dataType: string
+		lineageTag: f2f68a47-1a02-4995-a56f-93d854d082d4
+		summarizeBy: none
+		sourceColumn: SalesByESC(Meri) - Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SalesByESC(Meri) - Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6879ad3d-0ace-4793-a9e7-a37a98bdb63f
+		summarizeBy: sum
+		sourceColumn: SalesByESC(Meri) - Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RevByProductGroup - Alias'
+		dataType: string
+		lineageTag: a599f1c1-ecf2-463f-9818-c0ab7d5e13c5
+		summarizeBy: none
+		sourceColumn: RevByProductGroup - Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RevByProductGroup - Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: f82097ea-6bee-4702-90cd-f457411f624a
+		summarizeBy: sum
+		sourceColumn: RevByProductGroup - Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OverviewByProdGroupSlicer - Alias'
+		dataType: string
+		lineageTag: 7f2f686b-b48e-40da-9dec-4d83108c1c04
+		summarizeBy: none
+		sourceColumn: OverviewByProdGroupSlicer - Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OverviewByProdGroupSlicer - Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: e2f285ee-07cc-451e-95e1-730889f20225
+		summarizeBy: sum
+		sourceColumn: OverviewByProdGroupSlicer - Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGA Overview&Breakdown Slicer'
+		dataType: string
+		lineageTag: 9acf51e0-09d0-4b96-95ea-6681650b5620
+		summarizeBy: none
+		sourceColumn: SGA Overview&Breakdown Slicer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort
+		dataType: int64
+		formatString: 0
+		lineageTag: e8c4312d-647c-4ef4-bf2b-1553cba5eae0
+		summarizeBy: sum
+		sourceColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scorecard Pg Slicer'
+		dataType: string
+		lineageTag: e09522e2-3722-4a60-9efd-4092145be45a
+		summarizeBy: none
+		sourceColumn: Scorecard Pg Slicer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort_1
+		dataType: int64
+		formatString: 0
+		lineageTag: a8beb2b2-2090-4e67-9e0a-0bc852b004c4
+		summarizeBy: sum
+		sourceColumn: Sort_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGA Overview ASCost Table - Alias'
+		dataType: string
+		lineageTag: e4566a11-e4de-412a-8eef-520cad266c6a
+		summarizeBy: none
+		sourceColumn: SGA Overview ASCost Table - Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGA Overview ASCost Table - Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a9000cc-c150-4f7a-83bc-a48d67dc9365
+		summarizeBy: sum
+		sourceColumn: SGA Overview ASCost Table - Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Lookup
+		dataType: string
+		lineageTag: ffa8c805-9e62-450c-919a-e83b167e1814
+		summarizeBy: none
+		sourceColumn: Lookup
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_ProfitCenter - Alias & Ordering (New)' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\intern1\Downloads\DIM_ProfitCenter - Alias & Ordering .xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ProfitCenter", type text}, {"BI name", type text}, {"Overview - Alias", type text}, {"Overview - Sort", Int64.Type}, {"SalesByESC(Hari) - Alias", type text}, {"SalesByESC(Hari) - Sort", Int64.Type}, {"SalesByESC(Meri) - Alias", type text}, {"SalesByESC(Meri) - Sort", Int64.Type}, {"RevByProductGroup - Alias", type text}, {"RevByProductGroup - Sort", Int64.Type}, {"OverviewByProdGroupSlicer - Alias", type text}, {"OverviewByProdGroupSlicer - Sort", Int64.Type}, {"SGA Overview&Breakdown Slicer", type text}, {"Sort", Int64.Type}, {"Scorecard Pg Slicer", type text}, {"Sort_1", Int64.Type}, {"SGA Overview ASCost Table - Alias", type text}, {"SGA Overview ASCost Table - Sort", Int64.Type}, {"Lookup", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,35 @@
+table DIM_Currency
+	lineageTag: 23041048-1bc1-4c29-bc3b-2476a0f47ef0
+
+	column Currency
+		dataType: string
+		lineageTag: 6577e20a-0585-4ff2-b45b-ee6600c0d455
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Map
+		dataType: string
+		lineageTag: ad1a9167-bc4f-4857-a727-9b7995ed1a7a
+		summarizeBy: none
+		sourceColumn: Map
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Currency = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    DIM_Currency_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="DIM_Currency",version=""]}[Data],
+				    #"Removed Top Rows" = Table.Skip(DIM_Currency_,1),
+				    #"Added Conditional Column" = Table.AddColumn(#"Removed Top Rows", "Map", each if [Currency] = "SGD" then "SGD" else "LCY", type text)
+				in
+				    #"Added Conditional Column"
+
+	annotation PBI_ResultType = Table
+

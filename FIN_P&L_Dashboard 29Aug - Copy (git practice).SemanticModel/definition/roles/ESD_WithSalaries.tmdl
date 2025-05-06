@@ -1,0 +1,9 @@
+role ESD_WithSalaries
+	modelPermission: read
+
+	tablePermission DIM_Country = [Country] == "ESD"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "ESD"
+
+	annotation PBI_Id = db2d022d837046369095f337d13cba56
+

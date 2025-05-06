@@ -1,0 +1,53 @@
+table 'Selector Table - Product Category'
+	lineageTag: 8a828e61-1505-4039-8d49-bffb637607c4
+
+	column Sort
+		dataType: int64
+		formatString: 0
+		lineageTag: a8623a1b-33c8-411d-9ec8-9caf03faca6e
+		summarizeBy: sum
+		sourceColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Category'
+		dataType: string
+		lineageTag: ee8f60d7-8104-440c-9cde-f727556c564d
+		summarizeBy: none
+		sourceColumn: Product Category
+		sortByColumn: Sort
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Category - Copy'
+		dataType: string
+		lineageTag: ffd71d39-42d5-4ad4-af7b-57f0276b1778
+		summarizeBy: none
+		sourceColumn: Product Category - Copy
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Selector Table - Product Category' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUXL2DA5WitWJVjICcoI9XXzBHGMQJwDMNAEpyi8qyC9KLElVcAoFC5oCBQOKMvNKUosU8ksyUouKwcJmQGEftwAFjdSK5BwFkC5NsLg5UDzME8y0ADI9Pb3AbEsgOwhoeywA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Sort = _t, #"Product Category" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Sort", Int64.Type}, {"Product Category", type text}}),
+				    #"Duplicated Column" = Table.DuplicateColumn(#"Changed Type", "Product Category", "Product Category - Copy"),
+				    #"Replaced Value" = Table.ReplaceValue(#"Duplicated Column","CISS","ChromaPulse",Replacer.ReplaceText,{"Product Category - Copy"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","SIDM","DotLine SIDM",Replacer.ReplaceText,{"Product Category - Copy"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","Corporate BU","Corevia BU",Replacer.ReplaceText,{"Product Category - Copy"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","Printer others","OmniPrint",Replacer.ReplaceText,{"Product Category - Copy"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","LFP (excl Corp)","JetCore LFX",Replacer.ReplaceText,{"Product Category - Copy"}),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Replaced Value4","VI","Vistara VI",Replacer.ReplaceText,{"Product Category - Copy"}),
+				    #"Replaced Value6" = Table.ReplaceValue(#"Replaced Value5","IIJ","Inkline IIJ",Replacer.ReplaceText,{"Product Category - Copy"}),
+				    #"Replaced Value7" = Table.ReplaceValue(#"Replaced Value6","RS","RaySphere RS",Replacer.ReplaceText,{"Product Category - Copy"})
+				in
+				    #"Replaced Value7"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

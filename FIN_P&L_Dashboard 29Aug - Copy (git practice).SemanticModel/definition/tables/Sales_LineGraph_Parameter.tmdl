@@ -1,0 +1,53 @@
+table Sales_LineGraph_Parameter
+	lineageTag: 140589a4-03c6-4869-84a9-c872da262c6c
+
+	column Sales_LineGraph_Parameter
+		lineageTag: 4ad3f0ba-3888-4c1e-a715-0a78c9587c12
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Sales_LineGraph_Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Sales_LineGraph_Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales_LineGraph_Parameter Fields'
+		isHidden
+		lineageTag: a252eae6-e77f-4300-a235-36001ac787a5
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Sales_LineGraph_Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales_LineGraph_Parameter Order'
+		isHidden
+		formatString: 0
+		lineageTag: 3496a037-01f2-4f83-895e-051a531c4bde
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales_LineGraph_Parameter = calculated
+		mode: import
+		source =
+				{
+				    ("Last Year", NAMEOF('Measures Table'[Sales_Selector_LineGraph_PrevYear]), 0),
+				    ("FC3", NAMEOF('Measures Table'[Sales_Selector_LineGraph_FC3]), 1),
+				    ("FC2", NAMEOF('Measures Table'[Sales_Selector_LineGraph_FC2]), 2),
+				    ("FC1", NAMEOF('Measures Table'[Sales_Selector_LineGraph_FC1]), 3),
+				    ("FC0", NAMEOF('Measures Table'[Sales_Selector_LineGraph_FC0]), 4),
+				    ("BP", NAMEOF('Measures Table'[Sales_Selector_LineGraph_BP]), 5),
+				    ("Actual", NAMEOF('Measures Table'[Sales_Selector_LineGraph_Actual]), 6)
+				}
+
+	annotation PBI_Id = 49f8a73b0c964153add7c0f498f5c289
+

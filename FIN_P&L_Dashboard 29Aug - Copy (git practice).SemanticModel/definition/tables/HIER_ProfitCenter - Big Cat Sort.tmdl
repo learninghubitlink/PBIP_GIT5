@@ -1,0 +1,36 @@
+table 'HIER_ProfitCenter - Big Cat Sort'
+	lineageTag: 5a1cbc4e-6dc4-4a77-b34a-23b537328a3f
+
+	column 'Big Cat'
+		dataType: string
+		lineageTag: 4dc28b2e-12e4-4208-89c1-01555d7c27cb
+		summarizeBy: none
+		sourceColumn: Big Cat
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort
+		dataType: int64
+		formatString: 0
+		lineageTag: 307d855a-34a1-4a90-9756-5b27583bc355
+		summarizeBy: none
+		sourceColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'HIER_ProfitCenter - Big Cat Sort' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\khiaxeng\Downloads\Product Category update (1).xlsx"), null, true),
+				    big_cat_sorting_Sheet = Source{[Item="big_cat_sorting",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(big_cat_sorting_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Big Cat", type text}, {"big_cat_order_id", Int64.Type}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"big_cat_order_id", "Sort"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

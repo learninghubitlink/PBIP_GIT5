@@ -1,0 +1,65 @@
+table HIER_FIN_COA
+	lineageTag: 39ff97c1-ed55-4663-b8bd-935587a6af94
+
+	column FIN_COA_L4
+		dataType: string
+		lineageTag: c3051454-0e79-4f64-880a-97de739fe545
+		summarizeBy: none
+		sourceColumn: FIN_COA_L4
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIN_COA_L3
+		dataType: string
+		lineageTag: 18a2a1a3-e237-47e5-83a6-6e6fef01b7e2
+		summarizeBy: none
+		sourceColumn: FIN_COA_L3
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIN_COA_L2
+		dataType: string
+		lineageTag: 2d204ac2-f7e0-4e7b-9dc2-22e643b314cd
+		summarizeBy: none
+		sourceColumn: FIN_COA_L2
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIN_COA_L1
+		dataType: string
+		lineageTag: c1ff09e7-52fd-42d7-9cf7-befb42024735
+		summarizeBy: none
+		sourceColumn: FIN_COA_L1
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIN_COA_L0
+		dataType: string
+		lineageTag: 03a165c3-d19a-46a0-878f-81772c12d217
+		summarizeBy: none
+		sourceColumn: FIN_COA_L0
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIN_COA
+		dataType: string
+		lineageTag: 43541a77-dfce-469e-9707-4c7ebfa702df
+		summarizeBy: none
+		sourceColumn: FIN_COA
+
+		annotation SummarizationSetBy = Automatic
+
+	partition HIER_FIN_COA = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    HIER_FIN_COA_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="HIER_FIN_COA",version=""]}[Data]
+				in
+				    HIER_FIN_COA_
+
+	annotation PBI_ResultType = Table
+

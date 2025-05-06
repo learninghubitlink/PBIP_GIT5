@@ -1,0 +1,110 @@
+table FACT_FIN_ProfitAndLoss_Detailed
+	lineageTag: 06edd509-f223-4b76-9288-295033f38d9b
+
+	column ServerCube
+		dataType: string
+		lineageTag: 07da9d55-241c-4a44-954c-4de63396edc5
+		summarizeBy: none
+		sourceColumn: ServerCube
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: b3d9fa83-60e1-42ee-a6d2-be0bcb0493db
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 4726de4f-c0b7-4424-a90e-6aff3d3c71be
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 619884d4-3278-41bf-9e23-3ceb59ca56e5
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scenario
+		dataType: string
+		lineageTag: 63b14436-232d-4824-aa73-a1992a0fafe2
+		summarizeBy: none
+		sourceColumn: Scenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter
+		dataType: string
+		lineageTag: 2c3006a0-78d9-4f71-af2d-6f8f4136fb3a
+		summarizeBy: none
+		sourceColumn: ProfitCenter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: 29d97729-8c67-4435-8a0b-175e308ad1e1
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account
+		dataType: string
+		lineageTag: 2ef017c9-d580-46d0-8205-b4d8f658d887
+		summarizeBy: none
+		sourceColumn: Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		lineageTag: a720af7f-9fb4-49b1-ba29-6549d01ed1e3
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Year Month'
+		dataType: dateTime
+		formatString: Mmm yyyy
+		lineageTag: 674f493d-ca5f-467d-946a-83292ead5218
+		summarizeBy: none
+		sourceColumn: Year Month
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	partition FACT_FIN_ProfitAndLoss_Detailed = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    FACT_FIN_ProfitAndLoss_Detailed_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="FACT_FIN_ProfitAndLoss_Detailed",version=""]}[Data],
+				    #"Inserted Merged Column" = Table.AddColumn(FACT_FIN_ProfitAndLoss_Detailed_, "Merged", each Text.Combine({Text.From([Year], "en-US"), " ", [Month]}), type text),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Inserted Merged Column",{"ServerCube", "Year", "Month", "Merged", "Country", "Scenario", "ProfitCenter", "Currency", "Account", "Value"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Reordered Columns",{{"Merged", "Year Month"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

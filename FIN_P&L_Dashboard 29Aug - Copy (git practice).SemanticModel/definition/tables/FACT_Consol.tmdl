@@ -1,0 +1,114 @@
+table FACT_Consol
+	lineageTag: 1f8ef3a1-6e91-4dc5-b1d3-64c59a8bd160
+
+	column ServerCube
+		dataType: string
+		lineageTag: 28172412-6768-4d82-a896-ab5236e72d59
+		summarizeBy: none
+		sourceColumn: ServerCube
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 3f918431-11f9-4f19-a418-607b624429cc
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: b377e3e7-553d-4de9-92a6-d946fe609c7e
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: dc0dce63-8222-4a8a-b429-7f069cf14c87
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scenario
+		dataType: string
+		lineageTag: 8ef7dace-ae14-4160-8d0c-82c50b3027d5
+		summarizeBy: none
+		sourceColumn: Scenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter
+		dataType: string
+		lineageTag: 9eeeb372-6d62-4d73-81af-a220bf556c28
+		summarizeBy: none
+		sourceColumn: ProfitCenter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account
+		dataType: string
+		lineageTag: 5eb94fea-6136-46dd-9d99-f1b7afb78a6f
+		summarizeBy: none
+		sourceColumn: Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		dataType: dateTime
+		formatString: Mmm yyyy
+		lineageTag: 044aa5bf-6f3c-41d0-8075-25d312530c0a
+		summarizeBy: none
+		sourceColumn: Year Month
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column SGD
+		dataType: double
+		formatString: 0.######;-0.######;0.######
+		lineageTag: c2f8e77a-df38-45c2-ba85-d491626ef8e0
+		summarizeBy: sum
+		sourceColumn: SGD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column LCY
+		dataType: double
+		formatString: 0.######;-0.######;0.######
+		lineageTag: f549495a-9b59-41f0-9c36-82210501399f
+		summarizeBy: sum
+		sourceColumn: LCY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	partition FACT_Consol = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    FACT_Consol_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="FACT_Consol",version=""]}[Data],
+				    #"Appended Query" = Table.Combine({FACT_Consol_, FACT_Consol_FY24_FC0})
+				in
+				    #"Appended Query"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

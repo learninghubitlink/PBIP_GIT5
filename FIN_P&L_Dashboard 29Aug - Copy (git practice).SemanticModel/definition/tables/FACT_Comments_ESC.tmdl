@@ -1,0 +1,87 @@
+table FACT_Comments_ESC
+	lineageTag: 2eae4c76-fc06-4c3b-bbbf-f859bfd8a4cd
+
+	column Visual
+		dataType: string
+		lineageTag: 0e147e8e-4239-4044-b2ff-965ae3e29591
+		summarizeBy: none
+		sourceColumn: Visual
+
+		annotation SummarizationSetBy = Automatic
+
+	column ESC
+		dataType: string
+		lineageTag: 6a73fed1-8833-4baf-a106-568e8faa1437
+		summarizeBy: none
+		sourceColumn: ESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comment
+		dataType: string
+		lineageTag: 93c9bcb8-f23e-4c78-8909-1516060c2e4a
+		summarizeBy: none
+		sourceColumn: Comment
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY
+		dataType: int64
+		formatString: 0
+		lineageTag: 32ab84e6-cf78-4a59-b352-9de46de729e5
+		summarizeBy: sum
+		sourceColumn: FY
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 086aa094-3360-4346-adee-6f6c21c3f7be
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FY Year Month'
+		dataType: dateTime
+		formatString: Mmm yyyy
+		lineageTag: 2594bb8c-2b14-4de1-9a99-134a54d46a5a
+		summarizeBy: none
+		sourceColumn: FY Year Month
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	partition FACT_Comments_ESC = m
+		mode: import
+		source =
+				// let
+				//     Source = PowerPlatform.Dataflows(null),
+				//     Workspaces = Source{[Id="Workspaces"]}[Data],
+				//     #"1752833e-3977-423a-bce6-264afe353810" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				//     #"3bab4f99-3060-49c4-b9fc-27bcab372d7b" = #"1752833e-3977-423a-bce6-264afe353810"{[dataflowId="3bab4f99-3060-49c4-b9fc-27bcab372d7b"]}[Data],
+				//     #"Comments (BP)_" = #"3bab4f99-3060-49c4-b9fc-27bcab372d7b"{[entity="Comments (BP)",version=""]}[Data],
+				//     #"Changed Type" = Table.TransformColumnTypes(#"Comments (BP)_",{{"Period", type date}, {"Visual", type text}, {"ESC", type text}, {"Comment", type text}}),
+				//     #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Period", "Year Month"}})
+				// in
+				//     #"Renamed Columns"
+				
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"1752833e-3977-423a-bce6-264afe353810" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"3bab4f99-3060-49c4-b9fc-27bcab372d7b" = #"1752833e-3977-423a-bce6-264afe353810"{[dataflowId="3bab4f99-3060-49c4-b9fc-27bcab372d7b"]}[Data],
+				    #"Comments (BP)_" = #"3bab4f99-3060-49c4-b9fc-27bcab372d7b"{[entity="Comments (BP)",version=""]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"Comments (BP)_",{{"FY", Int64.Type}, {"Month", type text}, {"Visual", type text}, {"ESC", type text}, {"Comment", type text}}),
+				    #"Inserted Merged Column" = Table.AddColumn(#"Changed Type", "Merged", each Text.Combine({[Month], " ", Text.From([FY], "en-US")}), type text),
+				    #"Renamed Columns" = Table.RenameColumns(#"Inserted Merged Column",{{"Merged", "FY Year Month"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

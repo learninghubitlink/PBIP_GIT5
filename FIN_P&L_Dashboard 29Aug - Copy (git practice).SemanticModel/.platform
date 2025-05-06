@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "FIN_P&L_Dashboard 29Aug - Copy (git practice)"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6a98ea13-19ad-464d-a409-69878b4659a0"
+  }
+}

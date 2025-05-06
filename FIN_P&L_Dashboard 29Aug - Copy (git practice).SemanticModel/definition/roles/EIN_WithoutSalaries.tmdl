@@ -1,0 +1,15 @@
+role EIN_WithoutSalaries
+	modelPermission: read
+
+	tablePermission DIM_Account = [Account] <> "E00000" && [Account] <> "E00100" && [Account] <> "E00110" && [Account] <> "E00200" && [Account] <> "E00010" && [Account] <> "E00020" && [Account] <> "E00030"
+
+	tablePermission FACT_Consol = [Account] <> "Salaries"
+
+	tablePermission HIER_SgaAccount = [ECAS Account L1] <> "Salaries"
+
+	tablePermission DIM_Country = [Country] == "EIN-IDR"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "EIN-IDR"
+
+	annotation PBI_Id = 442d32a014c146628d2840552ace9376
+

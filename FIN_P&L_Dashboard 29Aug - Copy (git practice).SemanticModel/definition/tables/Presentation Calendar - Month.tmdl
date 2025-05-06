@@ -1,0 +1,27 @@
+table 'Presentation Calendar - Month'
+	lineageTag: 9716d218-921d-4178-852b-7b7007f253dc
+
+	column Month
+		lineageTag: 43796902-adae-4059-bf81-feb0bdb1a118
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Month[Month]
+		sortByColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort
+		formatString: 0
+		lineageTag: eab1894a-29cd-4af3-be49-efd5f6e82f46
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Month[Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Presentation Calendar - Month' = calculated
+		mode: import
+		source = DIM_Month
+
+	annotation PBI_Id = 83eebbff171b4c8d971f326a18a63135
+

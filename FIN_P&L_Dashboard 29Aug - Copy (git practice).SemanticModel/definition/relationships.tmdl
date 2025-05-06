@@ -1,0 +1,279 @@
+relationship 278b5afb-8d67-4550-b29c-c1dfe0feb1e4
+	fromColumn: FACT_Consol.Country
+	toColumn: DIM_Country.Country
+
+relationship 1b6a06ef-5436-431a-9667-28f86736aee5
+	fromColumn: FACT_FIN_ProfitAndLoss_Detailed.Country
+	toColumn: DIM_Country.Country
+
+relationship 0fd9d7bd-2f0e-4597-85f4-9a71c627b3c1
+	crossFilteringBehavior: bothDirections
+	fromColumn: HIER_Country.Country
+	toColumn: DIM_Country.Country
+
+relationship 82bc4658-41fa-4a20-bcb6-2175ca00a634
+	fromColumn: FACT_FIN_ProfitAndLoss_Detailed.Currency
+	toColumn: DIM_Currency.Currency
+
+relationship fe73f2bc-1df1-4a1d-bc7d-8de3fc483e6a
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: HIER_FIN_CC.FIN_CC
+	toColumn: DIM_FIN_CC.FIN_CC
+
+relationship 3a93c549-4010-4b62-8792-353d13f645c8
+	fromColumn: FACT_FIN_ProfitAndLoss_Detailed.ProfitCenter
+	toColumn: DIM_ProfitCenter.ProfitCenter
+
+relationship b4c66f40-8857-4832-b479-e5bba5c415f5
+	fromColumn: FACT_Consol.Scenario
+	toColumn: DIM_Scenario.Scenario
+
+relationship d70bec03-2bd7-4155-8d3f-7d5414a312c2
+	fromColumn: FACT_FIN_ProfitAndLoss_Detailed.Scenario
+	toColumn: DIM_Scenario.Scenario
+
+relationship 1877cbb7-f1a9-42a1-bf70-d80995d80ae8
+	fromColumn: FACT_FIN_ProfitAndLoss_Detailed.'Year Month'
+	toColumn: DIM_Calendar.'Year Month'
+
+relationship 6acafc71-ba20-42c3-a64a-f7bcdc2c36ed
+	fromColumn: FACT_Consol.ProfitCenter
+	toColumn: DIM_ProfitCenter.ProfitCenter
+
+relationship ca6e320c-0c41-4e62-a3f0-56eb45466a51
+	fromColumn: FACT_Consol.Account
+	toColumn: HIER_InStMeasure.InStMeasure_L0
+
+relationship c56daca0-2c07-4bb9-82a3-d13b7a53d910
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FACT_Inventory.MONTH
+	toColumn: LocalDateTable_5d03abd5-5f5f-4be4-86d4-fad0a9308997.Date
+
+relationship 65eba377-19bc-41cc-b33f-c47691616228
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FACT_Inventory.LOADDATE
+	toColumn: LocalDateTable_3d6c787d-dcf9-4763-8fb5-e16e2e3cb785.Date
+
+relationship 62ecfc4a-ea81-463c-b3c5-8ce5f57cfe32
+	fromColumn: FACT_Inventory.Country
+	toColumn: DIM_Country.Country
+
+relationship b087a80a-ed93-43a1-aab2-440d2057e4e5
+	fromColumn: FACT_Inventory.Currency
+	toColumn: DIM_Currency.Currency
+
+relationship 537d35a8-4c70-451d-958e-bac0e15aa1a2
+	isActive: false
+	fromColumn: FACT_Inventory.ProfitCenter
+	toColumn: DIM_ProfitCenter.ProfitCenter
+
+relationship 4fa832a3-21df-48d2-bf7f-be3b3860fc29
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Last Refresh Date'.'Last Refresh Date'
+	toColumn: LocalDateTable_6bb0bae8-9847-42f8-a1aa-1e41e382cd1e.Date
+
+relationship AutoDetected_59397976-1c9e-4eb7-b4ae-b7ff4a0c34c8
+	fromColumn: FACT_FIN_Exchange_Rate.Currency
+	toColumn: DIM_Currency.Currency
+
+relationship AutoDetected_23c6163d-ddbd-4e91-be94-ba6e77f85749
+	fromColumn: FACT_FIN_Exchange_Rate.Scenario
+	toColumn: DIM_Scenario.Scenario
+
+relationship 7dc77865-a0d5-4d74-a14e-3dce179ce9cc
+	crossFilteringBehavior: bothDirections
+	fromColumn: FACT_FIN_ProfitAndLoss_Detailed.Account
+	toColumn: DIM_Account.Account
+
+relationship 37d15a65-f4d9-46d6-9832-2ff624c6c758
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DIM_Calendar.'FY Year Month'
+	toColumn: LocalDateTable_8a511dd3-cb2d-449d-a048-712c2163aeca.Date
+
+relationship 3d2d3fd8-9b69-4fe3-99e0-3d2e6f226fa2
+	fromColumn: FACT_FIN_Exchange_Rate.'Year Month'
+	toColumn: DIM_Calendar.'FY Year Month'
+
+relationship 313bfccc-45e2-4d28-af41-fea78eba728b
+	isActive: false
+	fromColumn: DIM_Scenario.Scenario
+	toColumn: 'Selector Table (Hari Target)'.Scenario
+
+relationship 21c7a7fe-28a7-4202-a9c5-4eaaba50f5a3
+	fromColumn: INPUT_BusinessProfitTarget.ESCs
+	toColumn: DIM_Country.Country
+
+relationship b28fe67c-5de1-4ecb-ba9a-63f93aac033a
+	fromColumn: FACT_InventoryTarget.ESC
+	toColumn: DIM_Country.Country
+
+relationship 2ebed8e7-fb98-4c16-b5a7-03e3525ffaf0
+	isActive: false
+	fromColumn: DIM_Scenario.Scenario
+	toColumn: 'Selector Table - Scenario'.Scenario
+
+relationship AutoDetected_1e48d67c-5a18-4650-8757-d38970f021f5
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Selector Table - Tactical'.Sort
+	toColumn: 'Selector Table - SGA Acc'.Sort
+
+relationship 265a898a-1bb2-43e5-adc3-e4b24c859c71
+	isActive: false
+	fromColumn: DIM_Country.Country
+	toColumn: 'Selector Table - Country'.Country
+
+relationship AutoDetected_ceb8b539-d84c-4dfd-b977-a34de7bfbabb
+	fromColumn: DIM_Calendar.Month
+	toColumn: DIM_Month.Month
+
+relationship 03ce5ec4-6bc0-4849-8d06-13c4bbd1f3d1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Presentation Calendar'.'Year Month'
+	toColumn: LocalDateTable_e998e0fc-8d6e-4b5d-9b3a-f6af3b68ff67.Date
+
+relationship 452a75b6-8c4e-48ce-9b8e-6e2a28cbffb4
+	isActive: false
+	fromColumn: DIM_Calendar.'Year Month'
+	toColumn: 'Presentation Calendar'.'Year Month'
+
+relationship a6501307-4129-474c-a354-b09fe43b0cd4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Presentation Calendar'.'FY Year Month'
+	toColumn: LocalDateTable_a01fa568-5b08-4d9d-a779-d94c2ce2da3c.Date
+
+relationship 829fda51-0f3d-44ba-99ed-69bd5a27f68b
+	fromColumn: 'Presentation Calendar'.Month
+	toColumn: 'Presentation Calendar - Month'.Month
+
+relationship 5a2f85a4-befb-45f9-93e9-dfbc4161b5a4
+	fromColumn: HIER_ProfitCenter.ProfitCenter_L9
+	toColumn: 'DIM_ProfitCenter - Alias & Ordering'.ProfitCenter
+
+relationship 78c935f3-da9a-4d55-86ac-61a811f44f62
+	fromColumn: HIER_Country.Country_L1
+	toColumn: 'DIM_Country - Alias & Ordering'.Country
+
+relationship 8948ddb0-184e-4717-a978-31bb573054cd
+	fromColumn: FACT_Consol.'Year Month'
+	toColumn: DIM_Calendar.'FY Year Month'
+
+relationship fadbe5e0-3948-540c-499f-d1dd392dcba3
+	fromColumn: DIM_Scenario.Scenario
+	toColumn: 'DIM_Scenario - Alias & Ordering'.Scenario
+
+relationship 9dec10be-4b4d-4eda-8fe5-59d3872b00fd
+	isActive: false
+	fromColumn: HIER_Country.Country_L1
+	toColumn: 'Selector Table - Country'.Country
+
+relationship f65c3137-f39b-4e4f-ae4b-540ea2dae946
+	fromColumn: FACT_Consol_SGA.'Year Month'
+	toColumn: DIM_Calendar.'FY Year Month'
+
+relationship bb6fa965-4e2a-4aa8-a368-1e3ab30138a4
+	fromColumn: FACT_Consol_SGA.ProfitCenter
+	toColumn: DIM_ProfitCenter.ProfitCenter
+
+relationship 6b4cc538-9814-404c-9a5c-6eaa054183b7
+	fromColumn: FACT_Consol_SGA.Country
+	toColumn: DIM_Country.Country
+
+relationship 83b02e4f-5a9d-412a-b65b-5fa79623af4a
+	fromColumn: FACT_Consol_SGA.Scenario
+	toColumn: DIM_Scenario.Scenario
+
+relationship 57632d63-9217-4fba-8726-0ffda6a3f22b
+	fromColumn: FACT_Consol_SGA.Account
+	toColumn: HIER_SgaAccount.'ECAS Account L0'
+
+relationship 01192047-c70d-4b58-afac-96c2632af1cf
+	toCardinality: many
+	fromColumn: FACT_InventoryTarget.'Product Category'
+	toColumn: 'HIER_ProfitCenter (Inventory Target)'.'ProductCategory (FACT_InventoryTarget)'
+
+relationship 18093811-2dd4-a373-0ae6-017cca4cfbce
+	isActive: false
+	toCardinality: many
+	fromColumn: FACT_Inventory.CATEGORY
+	toColumn: 'HIER_ProfitCenter (Inventory Target)'.'ProductCategory (FACT_InventoryTarget)'
+
+relationship 8204d1e6-6e43-a758-cc07-e7e418f5005b
+	crossFilteringBehavior: bothDirections
+	fromColumn: HIER_ProfitCenter.ProfitCenter
+	toColumn: DIM_ProfitCenter.ProfitCenter
+
+relationship 2094e850-4b74-4ccf-95a9-4e30bc064896
+	fromColumn: FACT_Comments.'FY Year Month'
+	toColumn: DIM_Calendar.'FY Year Month'
+
+relationship 3f4699fb-7486-4f3c-8ba2-5ab68a8a9480
+	fromColumn: FACT_Comments_ESC.'FY Year Month'
+	toColumn: DIM_Calendar.'FY Year Month'
+
+relationship 50bc8de0-2f62-479c-9859-38eaf60044e2
+	fromColumn: FACT_Comments_ESC.ESC
+	toColumn: DIM_Country.Country
+
+relationship 34f1c293-3c33-4815-93b9-c34723d69794
+	fromColumn: INPUT_BusinessProfitTarget.'FY Year Month'
+	toColumn: DIM_Calendar.'FY Year Month'
+
+relationship 9b5fa787-3c59-4258-9df2-d259400a37d7
+	fromColumn: FACT_Inventory.'Year Month'
+	toColumn: DIM_Calendar.'Year Month'
+
+relationship b47edbc2-378e-4c0e-ba9f-a2c96ea37a8d
+	fromColumn: FACT_InventoryTarget.'Year Month'
+	toColumn: DIM_Calendar.'Year Month'
+
+relationship 14ee3bd4-fa14-659b-5fd9-6867914cb9d4
+	fromColumn: FACT_Inventory.ProfitCenter
+	toColumn: 'HIER_ProfitCenter (Inventory)'.ProfitCenter
+
+relationship f854efe4-2984-4bc6-8275-e690d767530c
+	fromColumn: FACT_Consol.ProfitCenter
+	toColumn: 'HIER_ProfitCenter (Inventory)'.ProfitCenter
+
+relationship 92a5f6aa-d4eb-472d-9c21-08dd40da9838
+	joinOnDateBehavior: datePartOnly
+	fromColumn: AllValuesTable.'Year Month'
+	toColumn: LocalDateTable_eab3cb75-6b6c-4e2b-8590-b39a29a7c5cd.Date
+
+relationship 96d30a88-85c5-b5f2-f0ec-640c703e0497
+	fromColumn: FACT_Inventory.ProfitCenter
+	toColumn: 'HIER_ProfitCenter - Big Cat'.ProfitCenter
+
+relationship 64ede6b3-d94a-4e5c-29e6-8ab286718dcc
+	fromColumn: FACT_Consol.ProfitCenter
+	toColumn: 'HIER_ProfitCenter - Big Cat'.ProfitCenter
+
+relationship 160dab99-b584-84fe-54d3-03986b7518f2
+	fromColumn: 'HIER_ProfitCenter - Big Cat'.'Big Cat'
+	toColumn: 'HIER_ProfitCenter - Big Cat Sort'.'Big Cat'
+
+relationship e17a864f-d83e-bfff-2bd5-16a4fcb00960
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'DIM_ProfitCenter - Alias & Ordering (New)'.'Overview - Alias'
+	toColumn: 'DIM_ProfitCenter - Alias & Ordering'.'Overview - Alias'
+
+relationship 68b5cb4e-d3a6-8db6-6119-4949b2c9ef09
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'DIM_Country & Alias - Ordering (New)'.Alias
+	toColumn: 'DIM_Country - Alias & Ordering'.Alias
+
+relationship 9a80ddad-1275-a9e7-5e2d-8f360357aa8e
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Selector Table - Country (New)'.Alias
+	toColumn: 'Selector Table - Country'.Alias
+
+relationship 404b7f0b-eb62-1646-825b-41964a817774
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'SGARatio Parameter (New)'.Country
+	toColumn: 'SGARatio Parameter'.Country
+

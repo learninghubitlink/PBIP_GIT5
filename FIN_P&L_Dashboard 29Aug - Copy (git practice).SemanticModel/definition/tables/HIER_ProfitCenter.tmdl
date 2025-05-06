@@ -1,0 +1,163 @@
+table HIER_ProfitCenter
+	lineageTag: b519d697-1f59-403b-ac4a-59a45fefb663
+
+	column ProfitCenter_L9
+		dataType: string
+		lineageTag: d2a8c742-3ed9-47b4-bb96-911ba3bd83fd
+		summarizeBy: none
+		sourceColumn: ProfitCenter_L9
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter_L8
+		dataType: string
+		lineageTag: 55c562a1-bb11-48c2-97a7-bd5da652311b
+		summarizeBy: none
+		sourceColumn: ProfitCenter_L8
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter_L7
+		dataType: string
+		lineageTag: 06eb7efb-3e74-4452-a204-fde22226a04c
+		summarizeBy: none
+		sourceColumn: ProfitCenter_L7
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter_L6
+		dataType: string
+		lineageTag: 81302d86-1ea9-4dfc-97a8-eea98cca85ea
+		summarizeBy: none
+		sourceColumn: ProfitCenter_L6
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter_L5
+		dataType: string
+		lineageTag: 79d8e02b-8218-482d-a628-5ad154e4212b
+		summarizeBy: none
+		sourceColumn: ProfitCenter_L5
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter_L4
+		dataType: string
+		lineageTag: 125495a3-54ae-41e2-ad8d-6c7f1c17cc21
+		summarizeBy: none
+		sourceColumn: ProfitCenter_L4
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter_L3
+		dataType: string
+		lineageTag: c4395c81-803a-4e3e-a216-ab9ba173d77f
+		summarizeBy: none
+		sourceColumn: ProfitCenter_L3
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter_L2
+		dataType: string
+		lineageTag: 34e0db26-9da3-4864-b999-76cd2d3c4da4
+		summarizeBy: none
+		sourceColumn: ProfitCenter_L2
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter_L1
+		dataType: string
+		lineageTag: 4f8d0460-3dba-4da6-8b65-da0584c28bf5
+		summarizeBy: none
+		sourceColumn: ProfitCenter_L1
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter_L0
+		dataType: string
+		lineageTag: f1294464-ca85-4f6b-8273-c7ef15194637
+		summarizeBy: none
+		sourceColumn: ProfitCenter_L0
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter
+		dataType: string
+		lineageTag: 92a43cd1-f7b3-48b5-82f9-35759fe63ed0
+		summarizeBy: none
+		sourceColumn: ProfitCenter
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'ProfitCenter_L9 Hierarchy'
+		lineageTag: af45f414-836f-417e-a67f-2038aa4caa53
+
+		level ProfitCenter_L9
+			lineageTag: f1b0b482-8343-4cb8-a797-77b2eaec03b7
+			column: ProfitCenter_L9
+
+		level ProfitCenter_L8
+			lineageTag: 14dbd678-bce0-45b6-bf3a-00bc24932cee
+			column: ProfitCenter_L8
+
+		level ProfitCenter_L7
+			lineageTag: d204d4ec-37e6-4a75-a6b2-a1874f4c7c59
+			column: ProfitCenter_L7
+
+		level ProfitCenter_L6
+			lineageTag: 069c4c4e-3f9a-4546-9a33-3667c02bc364
+			column: ProfitCenter_L6
+
+		level ProfitCenter_L5
+			lineageTag: d3f5ea69-5ba6-4a9c-9852-cbb51fa1f0b6
+			column: ProfitCenter_L5
+
+		level ProfitCenter_L4
+			lineageTag: 1386b6f8-ffcf-4450-9fe3-c2971c5584c8
+			column: ProfitCenter_L4
+
+		level ProfitCenter_L3
+			lineageTag: 1a241fc8-9018-40a8-8b88-6a72394995fe
+			column: ProfitCenter_L3
+
+		level ProfitCenter_L2
+			lineageTag: 470615ec-db28-48eb-b10d-2c9fb6f0397f
+			column: ProfitCenter_L2
+
+		level ProfitCenter_L1
+			lineageTag: 1e81c075-f4bd-4f5c-a3a7-e529d4018898
+			column: ProfitCenter_L1
+
+		level ProfitCenter_L0
+			lineageTag: 8a17ea35-0c56-4696-b3c0-5ec4d9df4598
+			column: ProfitCenter_L0
+
+		level ProfitCenter
+			lineageTag: 8af94a6e-eaca-4ff7-ac6c-db7b8bc997b4
+			column: ProfitCenter
+
+	hierarchy 'ProfitCenter_L4 Hierarchy'
+		lineageTag: 0313dad8-9fd0-4b8d-85a7-680e81b544d6
+
+		level ProfitCenter_L4
+			lineageTag: c9f17767-0b24-4416-8564-78440aea781d
+			column: ProfitCenter_L4
+
+		level ProfitCenter_L3
+			lineageTag: f6459c36-23b8-4cae-9bb6-c8dee44e8880
+			column: ProfitCenter_L3
+
+	partition HIER_ProfitCenter = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    HIER_ProfitCenter_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="HIER_ProfitCenter",version=""]}[Data]
+				in
+				    HIER_ProfitCenter_
+
+	annotation PBI_ResultType = Table
+

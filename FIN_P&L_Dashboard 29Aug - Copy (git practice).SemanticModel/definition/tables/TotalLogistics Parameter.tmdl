@@ -1,0 +1,53 @@
+table 'TotalLogistics Parameter'
+	lineageTag: 08d6896f-e936-40e1-b0aa-9a547790e42b
+
+	column 'TotalLogistics Parameter'
+		lineageTag: 3642defb-6926-4431-a3c6-679d25a44ca2
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'TotalLogistics Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'TotalLogistics Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TotalLogistics Parameter Fields'
+		isHidden
+		lineageTag: 8ba69c55-1651-4492-9a2a-d338e324ff3f
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'TotalLogistics Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TotalLogistics Parameter Order'
+		isHidden
+		formatString: 0
+		lineageTag: 7a3fd4b0-d3c2-4ed9-a046-30ca80fd42aa
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'TotalLogistics Parameter' = calculated
+		mode: import
+		source =
+				{
+				    ("TotalLogistics_Selector_LineGraph_EINIDR", NAMEOF('Measures Table'[TotalLogistics_Selector_LineGraph_EINIDR]), 0),
+				    ("TotalLogistics_Selector_LineGraph_EMSB", NAMEOF('Measures Table'[TotalLogistics_Selector_LineGraph_EMSB]), 1),
+				    ("TotalLogistics_Selector_LineGraph_EPC", NAMEOF('Measures Table'[TotalLogistics_Selector_LineGraph_EPC]), 2),
+				    ("TotalLogistics_Selector_LineGraph_ESD", NAMEOF('Measures Table'[TotalLogistics_Selector_LineGraph_ESD]), 3),
+				    ("TotalLogistics_Selector_LineGraph_ETH", NAMEOF('Measures Table'[TotalLogistics_Selector_LineGraph_ETH]), 4),
+				    ("TotalLogistics_Selector_LineGraph_EVNL", NAMEOF('Measures Table'[TotalLogistics_Selector_LineGraph_EVNL]), 5),
+				    ("TotalLogistics_Selector_LineGraph_IDC", NAMEOF('Measures Table'[TotalLogistics_Selector_LineGraph_IDC]), 6)
+				}
+
+	annotation PBI_Id = 86c3f0e0ef2e4d31b6c78de1cde38b80
+

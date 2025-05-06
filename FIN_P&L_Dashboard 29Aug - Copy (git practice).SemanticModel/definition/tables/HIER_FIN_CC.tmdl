@@ -1,0 +1,49 @@
+table HIER_FIN_CC
+	lineageTag: a7ae6750-1d81-4f7f-bf28-6b17ba5001b5
+
+	column FIN_CC_L2
+		dataType: string
+		lineageTag: da2ce40a-5a3f-4e81-bac5-a2d9c9aa7b94
+		summarizeBy: none
+		sourceColumn: FIN_CC_L2
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIN_CC_L1
+		dataType: string
+		lineageTag: 87286bf6-b91d-4f05-a3fa-8ebef4afb5a9
+		summarizeBy: none
+		sourceColumn: FIN_CC_L1
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIN_CC_L0
+		dataType: string
+		lineageTag: 259683b9-e6e0-43a9-a075-5cadda0cc13f
+		summarizeBy: none
+		sourceColumn: FIN_CC_L0
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIN_CC
+		dataType: string
+		lineageTag: 3452772d-acd7-4805-8aea-8299153071df
+		summarizeBy: none
+		sourceColumn: FIN_CC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition HIER_FIN_CC = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    HIER_FIN_CC_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="HIER_FIN_CC",version=""]}[Data]
+				in
+				    HIER_FIN_CC_
+
+	annotation PBI_ResultType = Table
+

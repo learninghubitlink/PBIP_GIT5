@@ -1,0 +1,9 @@
+role ETHTotal_WithSalaries
+	modelPermission: read
+
+	tablePermission DIM_Country = [Country] == "ETH" || [Country] == "IDC"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "ETH_Total"
+
+	annotation PBI_Id = 7915397d1ab340e0963fe85fa2facce5
+

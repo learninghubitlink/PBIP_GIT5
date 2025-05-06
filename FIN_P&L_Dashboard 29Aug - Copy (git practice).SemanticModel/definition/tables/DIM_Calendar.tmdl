@@ -1,0 +1,103 @@
+table DIM_Calendar
+	lineageTag: ce757715-3c19-4280-819a-b39db16bca53
+
+	measure 'Current Year'
+		lineageTag: 4caeaff0-7e44-4afa-9cf7-b6d04ba3afc3
+
+	column 'Year Month'
+		dataType: dateTime
+		formatString: Mmm yyyy
+		lineageTag: 47f13307-1f0b-4f44-8196-2c0242fb6e79
+		summarizeBy: none
+		sourceColumn: Year Month
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column Year
+		dataType: string
+		lineageTag: 13a006da-cf7a-4629-9c5e-174cb16fcd83
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 181adfa5-c5fb-4956-9bfa-1ea702ec9316
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month Number'
+		dataType: string
+		lineageTag: fe333bb4-01b7-4eb5-a224-3b931e20a086
+		summarizeBy: none
+		sourceColumn: Year Month Number
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FY Year Month'
+		dataType: dateTime
+		formatString: Mmm yyyy
+		lineageTag: b1ed3d44-f1ea-4be4-87ec-aed034cb6182
+		summarizeBy: none
+		sourceColumn: FY Year Month
+
+		variation Variation
+			isDefault
+			relationship: 37d15a65-f4d9-46d6-9832-2ff624c6c758
+			defaultHierarchy: LocalDateTable_8a511dd3-cb2d-449d-a048-712c2163aeca.'Date Hierarchy'
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column 'FY Year' = "FY" & right(YEAR(DIM_Calendar[FY Year Month]),2)
+		dataType: string
+		lineageTag: a098632e-245f-4eee-956b-329e810da504
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Calendar = m
+		mode: import
+		source =
+				let
+				    Source = let
+				    Source = List.Dates(#date(2000, 1, 1), Duration.Days(#date(2030, 12, 31) - #date(2000, 1, 1)) + 1, #duration(1,0,0,0)),
+				    ToTable = Table.FromList(Source, Splitter.SplitByNothing(), {"Date"}),
+				    AddYear = Table.AddColumn(ToTable, "Year", each Date.Year([Date])),
+				    AddMonthNumber = Table.AddColumn(AddYear, "Month Number", each Date.Month([Date])),
+				    AddMonth = Table.AddColumn(AddMonthNumber, "Month", each Date.ToText([Date], "MMM")),
+				    AddYearMonthNumber = Table.AddColumn(AddMonth, "Year Month Number", each [Year] * 12 + [Month Number] - 1),
+				    AddYearMonth = Table.AddColumn(AddYearMonthNumber, "Year Month", each Date.ToText([Date], "MMM yyyy")),
+				    SelectColumns = Table.SelectColumns(AddYearMonth, {"Year Month", "Year", "Month", "Year Month Number"}),
+				    RemoveDuplicates = Table.Distinct(SelectColumns, {"Year Month"})
+				in
+				    RemoveDuplicates,
+				    #"Added Custom" = Table.AddColumn(Source, "FY Year Month", each if List.Contains({"Jan", "Feb", "Mar"}, Text.Start([Month], 3))
+				then Text.Start([Month], 3) & " " & Text.From([Year] - 1)
+				else Text.Start([Month], 3) & " " & Text.From([Year])),
+				    #"Inserted Year" = Table.AddColumn(#"Added Custom", "Year.1", each Date.Year(Date.From([FY Year Month])), Int64.Type),
+				    #"Renamed Columns" = Table.RenameColumns(#"Inserted Year",{{"Year.1", "FY Year"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"FY Year"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

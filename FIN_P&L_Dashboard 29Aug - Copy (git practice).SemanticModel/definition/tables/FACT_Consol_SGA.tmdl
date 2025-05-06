@@ -1,0 +1,109 @@
+table FACT_Consol_SGA
+	lineageTag: 15aa66fa-b763-4f25-948c-16640ca91d26
+
+	column ServerCube
+		dataType: string
+		lineageTag: 45ea451e-5888-4364-b0bb-a0e86ee71a2d
+		summarizeBy: none
+		sourceColumn: ServerCube
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 9f27dd98-6eea-4cee-ab03-393f6be6a71f
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 9a5100d2-f551-482a-bfc4-e08f3db6fc4d
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		dataType: dateTime
+		formatString: Mmm yyyy
+		lineageTag: 212abd62-cf1b-48de-b021-c8abd653499c
+		summarizeBy: none
+		sourceColumn: Year Month
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column Country
+		dataType: string
+		lineageTag: ae8ff58c-6730-4ae3-b4b5-dc4ec12ae0be
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scenario
+		dataType: string
+		lineageTag: 641394ae-03ef-4466-ab8a-66845673de9f
+		summarizeBy: none
+		sourceColumn: Scenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter
+		dataType: string
+		lineageTag: 5de3b673-2419-4aad-b274-d99a5f8e3fd9
+		summarizeBy: none
+		sourceColumn: ProfitCenter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account
+		dataType: string
+		lineageTag: 96a280c3-29d3-4e66-bd63-20e3d8088108
+		summarizeBy: none
+		sourceColumn: Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column SGD
+		dataType: double
+		lineageTag: d2805f19-9435-4b1e-af9b-58443fa23a73
+		summarizeBy: sum
+		sourceColumn: SGD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LCY
+		dataType: double
+		lineageTag: 6be5e782-bb57-4033-892a-6dfbd87b270b
+		summarizeBy: sum
+		sourceColumn: LCY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FACT_Consol_SGA = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"1752833e-3977-423a-bce6-264afe353810" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cbecb17c-06ff-4c5e-8e8e-ad4564a89b88" = #"1752833e-3977-423a-bce6-264afe353810"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    FACT_Consol_SGA_ = #"cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"{[entity="FACT_Consol_SGA",version=""]}[Data]
+				in
+				    FACT_Consol_SGA_
+
+	annotation PBI_ResultType = Table
+

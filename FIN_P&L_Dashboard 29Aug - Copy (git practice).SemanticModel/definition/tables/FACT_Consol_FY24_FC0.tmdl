@@ -1,0 +1,104 @@
+table FACT_Consol_FY24_FC0
+	lineageTag: 23a3de45-0abe-4480-a7ff-47087d90761f
+
+	column ServerCube
+		dataType: string
+		lineageTag: 29f81b84-8c45-45fb-9ca2-20fd9cca1ed9
+		summarizeBy: none
+		sourceColumn: ServerCube
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: a1e5a496-3ff7-4301-a651-3814b2c935aa
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: ecbd65bf-fa89-461b-8b55-11904f842618
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		dataType: string
+		lineageTag: 0284eeae-5391-4d0d-bbd7-876d95ad8eb5
+		summarizeBy: none
+		sourceColumn: Year Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: b9957e4f-06fd-4f01-8eec-f9254eaeaa2d
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scenario
+		dataType: string
+		lineageTag: 11f28070-a9f3-4e4e-b81b-8daa5031d176
+		summarizeBy: none
+		sourceColumn: Scenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter
+		dataType: string
+		lineageTag: c4b37033-5eca-4fcc-81d6-a37bc8a51d63
+		summarizeBy: none
+		sourceColumn: ProfitCenter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Account
+		dataType: string
+		lineageTag: c1c4e818-0ea6-4b58-8d52-6db57a3eea28
+		summarizeBy: none
+		sourceColumn: Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column SGD
+		dataType: double
+		lineageTag: 990b7cd2-464c-4077-aae4-e269b47cb01e
+		summarizeBy: sum
+		sourceColumn: SGD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LCY
+		dataType: double
+		lineageTag: 3bc3d976-7054-42f5-aa03-a6f83150a0a5
+		summarizeBy: sum
+		sourceColumn: LCY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FACT_Consol_FY24_FC0 = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"1752833e-3977-423a-bce6-264afe353810" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cbecb17c-06ff-4c5e-8e8e-ad4564a89b88" = #"1752833e-3977-423a-bce6-264afe353810"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    FACT_Consol_FY24_FC0_ = #"cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"{[entity="FACT_Consol_FY24_FC0",version=""]}[Data]
+				in
+				    FACT_Consol_FY24_FC0_
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

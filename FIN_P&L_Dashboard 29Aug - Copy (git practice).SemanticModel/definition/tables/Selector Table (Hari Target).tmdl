@@ -1,0 +1,34 @@
+table 'Selector Table (Hari Target)'
+	lineageTag: 698ae5fc-268e-4a5b-99c5-d3e72fa904cd
+
+	column Sort
+		formatString: 0
+		lineageTag: f7417a6e-c3c8-4577-b84f-66f18e6be102
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Selector Table - Scenario[Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scenario
+		lineageTag: f03bef6a-d239-4de6-89a0-f7eb7cc32a7b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Selector Table - Scenario[Scenario]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alias
+		lineageTag: 402f6593-6641-47f9-8b73-50e6b76e5858
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Selector Table - Scenario[Alias]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Selector Table (Hari Target)' = calculated
+		mode: import
+		source = 'Selector Table - Scenario'
+
+	annotation PBI_Id = 7dfdfbb6621943939666c415a1dc6c3e
+

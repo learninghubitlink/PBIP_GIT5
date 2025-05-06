@@ -1,0 +1,9 @@
+role EIN_WithSalaries
+	modelPermission: read
+
+	tablePermission DIM_Country = [Country] == "EIN-IDR"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "EIN-IDR"
+
+	annotation PBI_Id = 18a4258133a24302a335eca6b41c056c
+

@@ -1,0 +1,41 @@
+table DIM_ProfitCenter
+	lineageTag: e48a7784-72b0-42ba-8dbb-d14043e7f7d7
+
+	column ProfitCenter
+		dataType: string
+		lineageTag: 96c93328-981d-4513-90eb-00684ab31f6f
+		summarizeBy: none
+		sourceColumn: ProfitCenter
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter_L0
+		dataType: string
+		lineageTag: 784e4ddd-3485-48d7-b6f6-e939e114e20c
+		summarizeBy: none
+		sourceColumn: ProfitCenter_L0
+
+		annotation SummarizationSetBy = Automatic
+
+	column MUCons
+		dataType: string
+		lineageTag: 5a856d89-1452-404c-9376-0044fcbaa4af
+		summarizeBy: none
+		sourceColumn: MUCons
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_ProfitCenter = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    DIM_ProfitCenter_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="DIM_ProfitCenter",version=""]}[Data]
+				in
+				    DIM_ProfitCenter_
+
+	annotation PBI_ResultType = Table
+

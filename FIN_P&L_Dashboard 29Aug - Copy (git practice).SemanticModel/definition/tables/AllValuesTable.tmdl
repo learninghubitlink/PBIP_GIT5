@@ -1,0 +1,87 @@
+table AllValuesTable
+	lineageTag: dd996599-ac2f-4dc0-81f9-cfb347182861
+
+	column 'Year Month'
+		formatString: General Date
+		lineageTag: f2582c0a-c63e-4ac1-82cf-07597897f01c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Presentation Calendar[Year Month]
+
+		variation Variation
+			isDefault
+			relationship: 92a5f6aa-d4eb-472d-9c21-08dd40da9838
+			defaultHierarchy: LocalDateTable_eab3cb75-6b6c-4e2b-8590-b39a29a7c5cd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		lineageTag: 019b558b-6dd6-4b8b-bcc5-e26348533426
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition AllValuesTable = calculated
+		mode: import
+		source =
+				
+				VAR ReferenceDate = MAX(DIM_Calendar[FY Year Month])
+				VAR CurrentDateCY = LOOKUPVALUE(DIM_Calendar[Year Month], DIM_Calendar[FY Year Month], ReferenceDate)
+				VAR CurrentYearCY = YEAR(CurrentDateCY)
+				VAR CurrentMonthCY = MONTH(CurrentDateCY)
+				VAR StartYTDDate =
+				    IF(
+				        CurrentMonthCY = 1 || CurrentMonthCY = 2 || CurrentMonthCY = 3,
+				        DATE(CurrentYearCY - 1, 4, 1),
+				        DATE(CurrentYearCY, 4, 1)
+				    )
+				RETURN
+				    UNION(
+				        SUMMARIZE(
+				            'Presentation Calendar',
+				            'Presentation Calendar'[Year Month],
+				            "Value", [SGARatio_Selector_LineGraph_CONSOL]
+				        ),
+				        SUMMARIZE(
+				            'Presentation Calendar',
+				            'Presentation Calendar'[Year Month],
+				            "Value", [SGARatio_Selector_LineGraph_EINIDR]
+				        ),
+				        SUMMARIZE(
+				            'Presentation Calendar',
+				            'Presentation Calendar'[Year Month],
+				            "Value", [SGARatio_Selector_LineGraph_EMSB]
+				        ),
+				        SUMMARIZE(
+				            'Presentation Calendar',
+				            'Presentation Calendar'[Year Month],
+				            "Value", [SGARatio_Selector_LineGraph_EPC]
+				        ),
+				        SUMMARIZE(
+				            'Presentation Calendar',
+				            'Presentation Calendar'[Year Month],
+				            "Value", [SGARatio_Selector_LineGraph_ESD]
+				        ),
+				        SUMMARIZE(
+				            'Presentation Calendar',
+				            'Presentation Calendar'[Year Month],
+				            "Value", [SGARatio_Selector_LineGraph_ESP]
+				        ),
+				        SUMMARIZE(
+				            'Presentation Calendar',
+				            'Presentation Calendar'[Year Month],
+				            "Value", [SGARatio_Selector_LineGraph_ETHTotal]
+				        ),
+				        SUMMARIZE(
+				            'Presentation Calendar',
+				            'Presentation Calendar'[Year Month],
+				            "Value", [SGARatio_Selector_LineGraph_EVNL]
+				        )
+				    )
+
+	annotation PBI_Id = d15b57f6d6024865afb532e229a4edd7
+

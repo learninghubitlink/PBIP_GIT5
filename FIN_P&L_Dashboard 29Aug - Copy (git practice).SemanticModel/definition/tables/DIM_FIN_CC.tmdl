@@ -1,0 +1,33 @@
+table DIM_FIN_CC
+	lineageTag: d3e3540e-b6fc-42d5-8f71-5f1c474b6b68
+
+	column FIN_CC
+		dataType: string
+		lineageTag: a37fa407-3c00-406d-ad21-777fb96fd7f7
+		summarizeBy: none
+		sourceColumn: FIN_CC
+
+		annotation SummarizationSetBy = Automatic
+
+	column FIN_CC_L0
+		dataType: string
+		lineageTag: c763f064-720b-4920-b5e1-50b71a083369
+		summarizeBy: none
+		sourceColumn: FIN_CC_L0
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_FIN_CC = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    DIM_FIN_CC_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="DIM_FIN_CC",version=""]}[Data]
+				in
+				    DIM_FIN_CC_
+
+	annotation PBI_ResultType = Table
+

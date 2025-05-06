@@ -1,0 +1,60 @@
+table 'A&P Parameter'
+	lineageTag: f25b92bf-a436-42cd-8595-bfd51efbdf48
+
+	column 'A&P Parameter'
+		lineageTag: 2e70f646-bf90-4115-ba1d-489d42b6f0bc
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'A&P Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'A&P Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'A&P Parameter Fields'
+		isHidden
+		lineageTag: a85395b8-b768-49ca-9a74-9454303ac780
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'A&P Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'A&P Parameter Order'
+		isHidden
+		formatString: 0
+		lineageTag: 15616e73-d968-4cb3-b17a-6d734f02842c
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		lineageTag: e97b8484-afa2-485c-8402-8fb2462e233c
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'A&P Parameter' = calculated
+		mode: import
+		source =
+				{
+				    ("EIN-IDR", NAMEOF('Measures Table'[TotalA&P_Selector_LineGraph_EINIDR]), 0, "EIN-IDR"),
+				    ("EMSB", NAMEOF('Measures Table'[TotalA&P_Selector_LineGraph_EMSB]), 1, "EMSB"),
+				    ("EPC", NAMEOF('Measures Table'[TotalA&P_Selector_LineGraph_EPC]), 2, "EPC"),
+				    ("ESD", NAMEOF('Measures Table'[TotalA&P_Selector_LineGraph_ESD]), 3, "ESD"),
+				    ("ETH", NAMEOF('Measures Table'[TotalA&P_Selector_LineGraph_ETH]), 4, "ETH"),
+				    ("EVNL", NAMEOF('Measures Table'[TotalA&P_Selector_LineGraph_EVNL]), 5, "EVNL"),
+				    ("IDC", NAMEOF('Measures Table'[TotalA&P_Selector_LineGraph_IDC]), 6, "IDC")
+				}
+
+	annotation PBI_Id = dde8ca4226e448059442024e45c3e732
+

@@ -1,0 +1,61 @@
+table 'SGARatio Parameter'
+	lineageTag: 298519a7-9425-467c-bc0a-3584abde2f8f
+
+	column 'SGARatio Parameter'
+		lineageTag: dd91f28f-efd7-4471-9f2d-3d5dd7d5a60e
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'SGARatio Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'SGARatio Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGARatio Parameter Fields'
+		isHidden
+		lineageTag: 46ad8c07-4d1c-437c-a0be-42f7b3f25dd4
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'SGARatio Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGARatio Parameter Order'
+		isHidden
+		formatString: 0
+		lineageTag: 4028727e-d3df-4d06-9de9-3a0a76638feb
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		lineageTag: 77ebaec2-8f25-41a6-ac48-730fb07f163a
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'SGARatio Parameter' = calculated
+		mode: import
+		source =
+				{
+				    ("CONSOL", NAMEOF('Measures Table'[SGARatio_Selector_LineGraph_CONSOL]), 0, "CONSOL"),
+				    ("Indonesia", NAMEOF('Measures Table'[SGARatio_Selector_LineGraph_EINIDR]), 1, "EIN-IDR"),
+				    ("Malaysia", NAMEOF('Measures Table'[SGARatio_Selector_LineGraph_EMSB]), 2, "EMSB"),
+				    ("Philippines", NAMEOF('Measures Table'[SGARatio_Selector_LineGraph_EPC]), 3, "EPC"),
+				    ("Denmark", NAMEOF('Measures Table'[SGARatio_Selector_LineGraph_ESD]), 4, "ESD"),
+				    ("China", NAMEOF('Measures Table'[SGARatio_Selector_LineGraph_ESP]), 5, "ESP"),
+				    ("USA", NAMEOF('Measures Table'[SGARatio_Selector_LineGraph_ETHTotal]), 6, "ETH"),
+				    ("New Zealand", NAMEOF('Measures Table'[SGARatio_Selector_LineGraph_EVNL]), 7, "EVNL")
+				}
+
+	annotation PBI_Id = 758debc1c6c949ffb241ba1c474b35bc
+

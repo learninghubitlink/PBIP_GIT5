@@ -1,0 +1,91 @@
+table FACT_FIN_Exchange_Rate
+	lineageTag: 9445aec5-7336-428c-bde1-9900541e9040
+
+	column ServerCube
+		dataType: string
+		lineageTag: 3369ad6d-2641-4f13-95fa-90aae90c496d
+		summarizeBy: none
+		sourceColumn: ServerCube
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b3168f9-ba2b-4163-b7dd-8da97e190c62
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: e8693ece-089d-4d86-95e5-d0cd9af5dc82
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scenario
+		dataType: string
+		lineageTag: 8652289e-5ec5-4f0e-99be-855b6ff3931d
+		summarizeBy: none
+		sourceColumn: Scenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: bff1df93-56d9-4904-af46-8ffe06568761
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: 7bdf7cd8-0da3-45cb-bb8c-3658906e6895
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		formatString: 0.00000000
+		lineageTag: 7834c523-3567-4fd0-bc6c-ef9f94c81a42
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		dataType: dateTime
+		formatString: Mmm yyyy
+		lineageTag: 55b4fd55-3507-439b-bac4-27fab7f22dac
+		summarizeBy: none
+		sourceColumn: Year Month
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	partition FACT_FIN_Exchange_Rate = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    FACT_FIN_Exchange_Rate_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="FACT_FIN_Exchange_Rate",version=""]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(FACT_FIN_Exchange_Rate_,{"Timestamp"}),
+				    #"Inserted Merged Column" = Table.AddColumn(#"Removed Columns", "Merged", each Text.Combine({Text.From([Year], "en-US"), " ", [Month]}), type text),
+				    #"Renamed Columns" = Table.RenameColumns(#"Inserted Merged Column",{{"Merged", "Year Month"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

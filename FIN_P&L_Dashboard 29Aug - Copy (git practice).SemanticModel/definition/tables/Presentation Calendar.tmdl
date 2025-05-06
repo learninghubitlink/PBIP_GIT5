@@ -1,0 +1,119 @@
+table 'Presentation Calendar'
+	lineageTag: 3924e7c5-05b2-4c30-ab3c-f2693041c229
+
+	column 'Year Month'
+		dataType: dateTime
+		formatString: Mmm yy
+		lineageTag: 1a77fd00-bf08-4ce0-9cc6-7abfb0f179d3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year Month]
+
+		variation Variation
+			isDefault
+			relationship: 03ce5ec4-6bc0-4849-8d06-13c4bbd1f3d1
+			defaultHierarchy: LocalDateTable_e998e0fc-8d6e-4b5d-9b3a-f6af3b68ff67.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column Year
+		formatString: 0
+		lineageTag: d57f6e3e-1431-4964-9ed4-7f8848ef856f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		formatString: 0
+		lineageTag: e6d11710-bc40-49b1-81ba-67d5ea444ce3
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 5848193a-e259-4e05-b12f-962ab51ee8bf
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		lineageTag: 26ee1980-cff9-4bd7-86e1-317963e0dd61
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month Number]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Sort
+		formatString: 0
+		lineageTag: c52d91b9-7103-4638-8619-574bda40f3a3
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FY Year Month'
+		dataType: dateTime
+		formatString: Mmm yy
+		lineageTag: 73f8e8a4-1662-4727-8b03-c5c55b715ea0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [FY Year Month]
+		sortByColumn: Sort
+
+		variation Variation
+			isDefault
+			relationship: a6501307-4129-474c-a354-b09fe43b0cd4
+			defaultHierarchy: LocalDateTable_a01fa568-5b08-4d9d-a779-d94c2ce2da3c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	partition 'Presentation Calendar' = calculated
+		mode: import
+		source = ```
+				
+				VAR Days = 
+				ADDCOLUMNS (
+				    CALENDAR ( DATE ( 2000, 01, 31 ), DATE ( 2030, 12, 31 ) ),
+				    "Year Month", FORMAT ( [Date], "YYYY-MM" )
+				)
+				VAR YearMonth = DISTINCT(SELECTCOLUMNS ( Days, "Year Month", [Year Month] ))
+				
+				RETURN ADDCOLUMNS(
+				    YearMonth,
+				    "Year", YEAR ( [Year Month] ),
+				    "Quarter", QUARTER([Year Month]),
+				    "Month", FORMAT(date(year([Year Month]),month([Year Month]),1),"Mmm"),
+				    "Month Number", MONTH([Year Month]),
+				    "Sort", DATEDIFF(DATE(1970,1,1),[Year Month],DAY),
+				    "FY Year Month", FORMAT (
+				        DATE (
+				            YEAR([Year Month]) - IF(MONTH([Year Month]) < 4, 1, 0),
+				            MONTH([Year Month]),
+				            1
+				        ),
+				        "Mmm yyyy"
+				    )
+				)
+				```
+
+	annotation PBI_Id = 24b8013b54c843f2bd42693141472b46
+

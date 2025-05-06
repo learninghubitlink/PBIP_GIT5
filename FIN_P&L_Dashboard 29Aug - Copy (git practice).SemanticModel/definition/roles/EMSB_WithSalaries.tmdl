@@ -1,0 +1,9 @@
+role EMSB_WithSalaries
+	modelPermission: read
+
+	tablePermission DIM_Country = [Country] == "EMSB"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "EMSB"
+
+	annotation PBI_Id = 2a793867f68d4ba7bb13e63cd91a1336
+

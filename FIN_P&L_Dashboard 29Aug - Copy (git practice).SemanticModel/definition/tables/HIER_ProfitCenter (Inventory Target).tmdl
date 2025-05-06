@@ -1,0 +1,36 @@
+table 'HIER_ProfitCenter (Inventory Target)'
+	lineageTag: f765408b-8bae-4ac5-8e1d-3c52ef93fcb3
+
+	column ProfitCenter_L9
+		dataType: string
+		lineageTag: 0fb9b0e0-b3b8-4470-9aed-3a17520496c6
+		summarizeBy: none
+		sourceColumn: ProfitCenter_L9
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ProductCategory (FACT_InventoryTarget)'
+		dataType: string
+		lineageTag: f9212623-4563-49f4-9f2f-b06da0897a5e
+		summarizeBy: none
+		sourceColumn: ProductCategory (FACT_InventoryTarget)
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'HIER_ProfitCenter (Inventory Target)' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"1752833e-3977-423a-bce6-264afe353810" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"3bab4f99-3060-49c4-b9fc-27bcab372d7b" = #"1752833e-3977-423a-bce6-264afe353810"{[dataflowId="3bab4f99-3060-49c4-b9fc-27bcab372d7b"]}[Data],
+				    #"Map - ProfitCenter Inven Target_" = #"3bab4f99-3060-49c4-b9fc-27bcab372d7b"{[entity="Map - ProfitCenter Inven Target",version=""]}[Data],
+				    #"Added Custom" = Table.AddColumn(#"Map - ProfitCenter Inven Target_", "filter", each [ProfitCenter_L9] & "|" & [#"ProductCategory (FACT_InventoryTarget)"]),
+				    #"Filtered Rows" = Table.SelectRows(#"Added Custom", each ([filter] <> "Retail Products|SP")),
+				    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows",{"filter"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

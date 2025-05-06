@@ -1,0 +1,115 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["DIM_Account","DIM_Country","DIM_Currency","DIM_FIN_CC","DIM_FIN_COA","DIM_ProfitCenter","DIM_Scenario","FACT_Consol","FACT_FIN_ProfitAndLoss_Detailed","HIER_Country","HIER_FIN_CC","HIER_FIN_COA","HIER_InStMeasure","HIER_ProfitCenter","DIM_Calendar","SelectorTable","Selector Table - Scenario","Selector Table - Country","Selector Table - Product Category","Measures Table","Selector Table - BU","Selector Table - TotalCo BPD ED","FACT_Inventory","Last Refresh Date","Selector Table - Tactical","FACT_FIN_Exchange_Rate","Selector Table - Sales Minus","INPUT_BusinessProfitTarget","Selector Table - SGA Acc","FACT_InventoryTarget","DIM_Month","DIM_Country - Alias & Ordering","DIM_ProfitCenter - Alias & Ordering","Selector Table - Currency","DIM_Scenario - Alias & Ordering","HIER_SgaAccount","FACT_Consol_SGA","HIER_ProfitCenter (Inventory Target)","FACT_Comments","FACT_Comments_ESC","HIER_ProfitCenter (Inventory)","INPUT_Legend","FACT_Consol_FY24_FC0","Selector Table - Revenue/Achievement","HIER_ProfitCenter - Big Cat Sort","HIER_ProfitCenter - Big Cat","DIM_Country & Alias - Ordering (New)","DIM_ProfitCenter - Alias & Ordering (New)","Selector Table - Country (New)","SGARatio Parameter (New)","HIER_SgaAccount (New)"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.142.928.0 (25.04)+de52df9f0bb74ad93a80d89c52d63fe6d07e0e1b
+
+annotation __TEdtr = 1
+
+annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
+
+ref table DIM_Account
+ref table DateTableTemplate_5e50b392-871d-4414-840c-de8c8fe270f8
+ref table DIM_Country
+ref table DIM_Currency
+ref table DIM_FIN_CC
+ref table DIM_FIN_COA
+ref table DIM_ProfitCenter
+ref table DIM_Scenario
+ref table FACT_Consol
+ref table FACT_FIN_ProfitAndLoss_Detailed
+ref table HIER_Country
+ref table HIER_FIN_CC
+ref table HIER_FIN_COA
+ref table HIER_InStMeasure
+ref table HIER_ProfitCenter
+ref table DIM_Calendar
+ref table SelectorTable
+ref table 'Presentation Calendar'
+ref table 'Selector Table - Scenario'
+ref table 'Selector Table - Country'
+ref table 'Selector Table - Product Category'
+ref table 'Measures Table'
+ref table Sales_LineGraph_Parameter
+ref table 'Selector Table - BU'
+ref table 'SGARatio Parameter'
+ref table 'A&P Parameter'
+ref table 'Selector Table - TotalCo BPD ED'
+ref table FACT_Inventory
+ref table LocalDateTable_5d03abd5-5f5f-4be4-86d4-fad0a9308997
+ref table LocalDateTable_3d6c787d-dcf9-4763-8fb5-e16e2e3cb785
+ref table 'SlowInven% Parameter'
+ref table 'Last Refresh Date'
+ref table LocalDateTable_6bb0bae8-9847-42f8-a1aa-1e41e382cd1e
+ref table 'Selector Table - Tactical'
+ref table FACT_FIN_Exchange_Rate
+ref table 'Selector Table - Sales Minus'
+ref table LocalDateTable_8a511dd3-cb2d-449d-a048-712c2163aeca
+ref table 'Selector Table (Hari Target)'
+ref table INPUT_BusinessProfitTarget
+ref table 'Selector Table - SGA Acc'
+ref table FACT_InventoryTarget
+ref table DIM_Month
+ref table LocalDateTable_e998e0fc-8d6e-4b5d-9b3a-f6af3b68ff67
+ref table LocalDateTable_a01fa568-5b08-4d9d-a779-d94c2ce2da3c
+ref table 'Presentation Calendar - Month'
+ref table 'DIM_Country - Alias & Ordering'
+ref table 'DIM_ProfitCenter - Alias & Ordering'
+ref table 'Selector Table - Currency'
+ref table 'TotalLogistics Parameter'
+ref table 'DIM_Scenario - Alias & Ordering'
+ref table 'SgaAccount Parameter'
+ref table HIER_SgaAccount
+ref table FACT_Consol_SGA
+ref table 'HIER_ProfitCenter (Inventory Target)'
+ref table FACT_Comments
+ref table FACT_Comments_ESC
+ref table 'HIER_ProfitCenter (Inventory)'
+ref table AllValuesTable
+ref table LocalDateTable_eab3cb75-6b6c-4e2b-8590-b39a29a7c5cd
+ref table INPUT_Legend
+ref table FACT_Consol_FY24_FC0
+ref table 'Selector Table - Revenue/Achievement'
+ref table 'HIER_ProfitCenter - Big Cat Sort'
+ref table 'HIER_ProfitCenter - Big Cat'
+ref table 'DIM_Country & Alias - Ordering (New)'
+ref table 'DIM_ProfitCenter - Alias & Ordering (New)'
+ref table 'Selector Table - Country (New)'
+ref table 'SGARatio Parameter (New)'
+ref table 'HIER_SgaAccount (New)'
+
+ref role AllESC_WithoutSalaries
+ref role AllESC_WithSalaries
+ref role EIN_WithoutSalaries
+ref role EIN_WithSalaries
+ref role EMSB_WithoutSalaries
+ref role EMSB_WithSalaries
+ref role EPC_WithoutSalaries
+ref role EPC_WithSalaries
+ref role ESD_WithoutSalaries
+ref role ESD_WithSalaries
+ref role ESP_WithoutSalaries
+ref role ESP_WithSalaries
+ref role ETH_WithoutSalaries
+ref role ETH_WithSalaries
+ref role ETHTotal_WithoutSalaries
+ref role ETHTotal_WithSalaries
+ref role EVNL_WithoutSalaries
+ref role EVNL_WithSalaries
+ref role FinanceConsol_WithoutSalaries
+ref role FinanceConsol_WithSalaries
+ref role IDC_WithoutSalaries
+ref role IDC_WithSalaries
+ref role OthersDir_WIthoutSalaries
+ref role OthersDir_WithSalaries
+
+ref cultureInfo en-US
+

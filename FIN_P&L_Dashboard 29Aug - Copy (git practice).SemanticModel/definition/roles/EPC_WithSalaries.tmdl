@@ -1,0 +1,9 @@
+role EPC_WithSalaries
+	modelPermission: read
+
+	tablePermission DIM_Country = [Country] == "EPC"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "EPC"
+
+	annotation PBI_Id = 9b30a262e8ba4723839b5f8221ae42d4
+

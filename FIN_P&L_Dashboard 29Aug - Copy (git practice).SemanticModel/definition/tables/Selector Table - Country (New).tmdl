@@ -1,0 +1,251 @@
+table 'Selector Table - Country (New)'
+	lineageTag: 853ed7fe-310f-432e-a4ba-ba9ae1303ae2
+
+	column Country
+		dataType: string
+		lineageTag: 5c425671-2f14-49e7-9c66-bf781a3bdf74
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alias
+		dataType: string
+		lineageTag: 144df092-67e0-4678-a2a0-c0c304036855
+		summarizeBy: none
+		sourceColumn: Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BP Alias'
+		dataType: string
+		lineageTag: 93541321-6717-4317-ac4c-0f23a5fa3263
+		summarizeBy: none
+		sourceColumn: BP Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BP Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 649a913f-1c63-48c1-8979-300f59748b94
+		summarizeBy: sum
+		sourceColumn: BP Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scorecard Alias'
+		dataType: string
+		lineageTag: 2baea5e1-dd26-4ac3-a587-e087b8c7439f
+		summarizeBy: none
+		sourceColumn: Scorecard Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scorecard Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 96a1e5db-6fc5-4801-bfc2-9ddd105eadf4
+		summarizeBy: sum
+		sourceColumn: Scorecard Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Overview Slicer'
+		dataType: string
+		lineageTag: d0dc0304-f485-4b9a-9f7f-f4c898ff7159
+		summarizeBy: none
+		sourceColumn: Overview Slicer
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Overview Slicer Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 56caf571-1365-4058-9b06-a1d230596139
+		summarizeBy: sum
+		sourceColumn: Overview Slicer Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Analysis - Sales Achievement Bar Alias'
+		dataType: string
+		lineageTag: 2ecdb99d-e681-421b-b390-ba53185d63ea
+		summarizeBy: none
+		sourceColumn: Sales Analysis - Sales Achievement Bar Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Analysis - Sales Achievement Bar Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: a0602f39-0ede-402c-8179-5af10cbcaadf
+		summarizeBy: sum
+		sourceColumn: Sales Analysis - Sales Achievement Bar Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BPD Pg ESC Slicer'
+		dataType: string
+		lineageTag: 73710d6d-6862-4d0e-81df-c2e85d63a81b
+		summarizeBy: none
+		sourceColumn: BPD Pg ESC Slicer
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BPD Pg ESC Slicer Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: c3d717a2-d2f8-4a1a-aec9-9fd0bd3f9de1
+		summarizeBy: sum
+		sourceColumn: BPD Pg ESC Slicer Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RevenueByESC Bar&Table'
+		dataType: string
+		lineageTag: 1d43cc74-90d7-44fa-8487-b7a31cb9737d
+		summarizeBy: none
+		sourceColumn: RevenueByESC Bar&Table
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RevenueByESC Bar&Table Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: b20aca64-d769-4da4-80ea-6fd4ae98ce5f
+		summarizeBy: sum
+		sourceColumn: RevenueByESC Bar&Table Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SalesMinus & Tactical Table Alias'
+		dataType: string
+		lineageTag: 9a56a7b1-f246-4c51-8199-bb44524048ff
+		summarizeBy: none
+		sourceColumn: SalesMinus & Tactical Table Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SalesMinus & Tactical Table Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2229ecc4-150e-4d4a-b948-67996f5e186d
+		summarizeBy: sum
+		sourceColumn: SalesMinus & Tactical Table Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGA Overview&Breakdown Slicer'
+		dataType: string
+		lineageTag: 79abba52-fc95-42e5-8e68-e61afd3f4ca6
+		summarizeBy: none
+		sourceColumn: SGA Overview&Breakdown Slicer
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGA Overview&Breakdown Slicer Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b50fbb3-a4bc-4a71-b1d0-2eb350b0a126
+		summarizeBy: sum
+		sourceColumn: SGA Overview&Breakdown Slicer Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CompanyScorecard BP Table'
+		dataType: string
+		lineageTag: 96857621-50e6-4ee7-8bd3-41a39328c60f
+		summarizeBy: none
+		sourceColumn: CompanyScorecard BP Table
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CompanyScorecard BP Table Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: f27972f0-b3ac-493e-bc7c-5b2a4cb1ca06
+		summarizeBy: sum
+		sourceColumn: CompanyScorecard BP Table Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Inventory
+		dataType: string
+		lineageTag: 060255c8-9399-4353-9811-18adcb6b1110
+		summarizeBy: none
+		sourceColumn: Inventory
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inventory Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6f0316b5-b892-45c7-98b9-6d736f6ce86b
+		summarizeBy: sum
+		sourceColumn: Inventory Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGA General'
+		dataType: string
+		lineageTag: 6819e39f-e9d0-46b3-a20f-52dd5248d033
+		summarizeBy: none
+		sourceColumn: SGA General
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SGA General Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2fecda16-78fa-4fd3-8fae-0f32c68ac7e7
+		summarizeBy: sum
+		sourceColumn: SGA General Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scorecard - Alias'
+		dataType: string
+		lineageTag: 8b5555b1-cd53-4e1a-808e-2254961acb7b
+		summarizeBy: none
+		sourceColumn: Scorecard - Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Scorecard - Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 77ba4464-325d-46ae-a2d3-b83d6e944454
+		summarizeBy: sum
+		sourceColumn: Scorecard - Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Countries
+		dataType: string
+		lineageTag: 13d28c94-2087-450c-81f0-301e96a195cc
+		summarizeBy: none
+		sourceColumn: Countries
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Selector Table - Country (New)' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\intern1\Downloads\Selector Table - Country.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Country", type text}, {"Alias", type text}, {"BP Alias", type text}, {"BP Sort", Int64.Type}, {"Scorecard Alias", type text}, {"Scorecard Sort", Int64.Type}, {"Overview Slicer", type text}, {"Overview Slicer Sort", Int64.Type}, {"Sales Analysis - Sales Achievement Bar Alias", type text}, {"Sales Analysis - Sales Achievement Bar Sort", Int64.Type}, {"BPD Pg ESC Slicer", type text}, {"BPD Pg ESC Slicer Sort", Int64.Type}, {"RevenueByESC Bar&Table", type text}, {"RevenueByESC Bar&Table Sort", Int64.Type}, {"SalesMinus & Tactical Table Alias", type text}, {"SalesMinus & Tactical Table Sort", Int64.Type}, {"SGA Overview&Breakdown Slicer", type text}, {"SGA Overview&Breakdown Slicer Sort", Int64.Type}, {"CompanyScorecard BP Table", type text}, {"CompanyScorecard BP Table Sort", Int64.Type}, {"Inventory", type text}, {"Inventory Sort", Int64.Type}, {"SGA General", type text}, {"SGA General Sort", Int64.Type}, {"Scorecard - Alias", type text}, {"Scorecard - Sort", Int64.Type}, {"Lookup", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Lookup", "Countries"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns","USA","Thailand Total",Replacer.ReplaceText,{"Countries"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","UK","Singapore",Replacer.ReplaceText,{"Countries"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","China","Singapore",Replacer.ReplaceText,{"Countries"}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","New Zealand","Vietnam",Replacer.ReplaceText,{"Countries"})
+				in
+				    #"Replaced Value3"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

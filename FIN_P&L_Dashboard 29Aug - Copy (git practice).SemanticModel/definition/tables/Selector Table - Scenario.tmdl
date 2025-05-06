@@ -1,0 +1,40 @@
+table 'Selector Table - Scenario'
+	lineageTag: a63ed441-4489-491d-b733-daf6c7473685
+
+	column Sort
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c43affb-8f9e-40a4-a5c0-09b155c69a0e
+		summarizeBy: sum
+		sourceColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scenario
+		dataType: string
+		lineageTag: 2df0e19d-d379-4a57-9bfd-f322ec8203ec
+		summarizeBy: none
+		sourceColumn: Scenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alias
+		dataType: string
+		lineageTag: 9b31f492-b14b-4805-9ff2-d82a7de9c7ad
+		summarizeBy: none
+		sourceColumn: Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Selector Table - Scenario' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUXJMLilNzEEwYnWilYyAXKcABQ23zLzEHIXk0hJNsABYzhjIdHM2gJIgERMw21BBwygvRcG5tEQBrE0TIgpWYQpmG2FVYQRWYQZmG0NUJKOqMAarMAexPf3iIc6M90ksLomPLAIKBhSllilEpiYWKcXGAgA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t, Column2 = _t, Column3 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", Int64.Type}, {"Column2", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Column1", "Sort"}, {"Column2", "Scenario"}, {"Column3", "Alias"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

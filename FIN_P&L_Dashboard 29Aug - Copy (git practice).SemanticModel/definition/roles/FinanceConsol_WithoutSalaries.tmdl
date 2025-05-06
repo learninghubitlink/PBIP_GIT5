@@ -1,0 +1,15 @@
+role FinanceConsol_WithoutSalaries
+	modelPermission: read
+
+	tablePermission DIM_Account = [Account] <> "E00000" && [Account] <> "E00100" && [Account] <> "E00110" && [Account] <> "E00200" && [Account] <> "E00010" && [Account] <> "E00020" && [Account] <> "E00030"
+
+	tablePermission DIM_Country = [Country] == "Finance Consol Without EPIL"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "Finance Consol Without EPIL"
+
+	tablePermission FACT_Consol = [Account] <> "Salaries"
+
+	tablePermission HIER_SgaAccount = [ECAS Account L1] <> "Salaries"
+
+	annotation PBI_Id = eab348ad77584c72a5951a371e802f30
+

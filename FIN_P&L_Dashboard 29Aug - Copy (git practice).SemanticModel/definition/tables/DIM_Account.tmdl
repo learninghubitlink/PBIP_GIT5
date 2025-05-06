@@ -1,0 +1,47 @@
+table DIM_Account
+	lineageTag: 25399e5e-298b-4120-8aa2-13975098e86e
+
+	column Account
+		dataType: string
+		lineageTag: 56fd3bd3-16bc-4e66-9044-1235375c78be
+		summarizeBy: none
+		sourceColumn: Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alias
+		dataType: string
+		lineageTag: 28a836a0-7cf3-47eb-9814-ca23a50e591b
+		summarizeBy: none
+		sourceColumn: Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column equal
+		dataType: string
+		lineageTag: bd14976c-6bdc-41ba-896a-086f41249175
+		summarizeBy: none
+		sourceColumn: equal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Account = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    DIM_Account_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="DIM_Account",version=""]}[Data],
+				    #"Added Custom" = Table.AddColumn(DIM_Account_, "equal", each if [Account] = [Alias] then true else false),
+				    #"Sorted Rows" = Table.Sort(#"Added Custom",{{"Alias", Order.Descending}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Sorted Rows", {"Account"}),
+				    #"Sorted Rows1" = Table.Sort(#"Removed Duplicates",{{"Account", Order.Ascending}})
+				in
+				    #"Sorted Rows1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

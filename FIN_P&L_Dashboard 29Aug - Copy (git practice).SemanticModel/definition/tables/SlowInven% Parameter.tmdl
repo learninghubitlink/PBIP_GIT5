@@ -1,0 +1,53 @@
+table 'SlowInven% Parameter'
+	lineageTag: 7db4c90c-7383-4760-8b10-d531c6168d33
+
+	column Parameter
+		lineageTag: 5f7e1ad3-4175-4f54-97bd-080abedf8ef9
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		isHidden
+		lineageTag: 3528f3db-3f23-4018-9630-3e98e57c998d
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		isHidden
+		formatString: 0
+		lineageTag: fe6962b0-9bdd-45d0-bbe7-36c147dfee35
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'SlowInven% Parameter' = calculated
+		mode: import
+		source =
+				{
+				    ("China", NAMEOF('Measures Table'[SlowInven%_Selector_LineGraph_ESP]), 0),
+				    ("Indonesia", NAMEOF('Measures Table'[SlowInven%_Selector_LineGraph_EIN]), 1),
+				    ("Philippines", NAMEOF('Measures Table'[SlowInven%_Selector_LineGraph_EPC]), 2),
+				    ("Thailand", NAMEOF('Measures Table'[SlowInven%_Selector_LineGraph_ETH]), 3),
+				    ("Malaysia", NAMEOF('Measures Table'[SlowInven%_Selector_LineGraph_EMSB]), 4),
+				    ("New Zealand", NAMEOF('Measures Table'[SlowInven%_Selector_LineGraph_EVNL]), 5),
+				    ("CONSO", NAMEOF('Measures Table'[SlowInven%_Selector_LineGraph_ESPCONSO]), 6)
+				}
+
+	annotation PBI_Id = be27292fd73c4901b653a98a5b856e9a
+

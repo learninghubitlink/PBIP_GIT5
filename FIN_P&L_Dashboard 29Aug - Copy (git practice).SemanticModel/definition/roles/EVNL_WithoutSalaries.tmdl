@@ -1,0 +1,15 @@
+role EVNL_WithoutSalaries
+	modelPermission: read
+
+	tablePermission DIM_Account = [Account] <> "E00000" && [Account] <> "E00100" && [Account] <> "E00110" && [Account] <> "E00200" && [Account] <> "E00010" && [Account] <> "E00020" && [Account] <> "E00030"
+
+	tablePermission DIM_Country = [Country] == "ESP-EVNL" || [Country] == "EVNL"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "Total EVNL" || [Country] == "EVNL Total"
+
+	tablePermission FACT_Consol = [Account] <> "Salaries"
+
+	tablePermission HIER_SgaAccount = [ECAS Account L1] <> "Salaries"
+
+	annotation PBI_Id = 50c8f8db979c412e8136b92570916dc0
+

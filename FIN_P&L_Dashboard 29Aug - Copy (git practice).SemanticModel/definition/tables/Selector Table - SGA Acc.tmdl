@@ -1,0 +1,33 @@
+table 'Selector Table - SGA Acc'
+	lineageTag: ba3aea7b-ab18-4292-8fee-71c57536f2b2
+
+	column 'SGA Account'
+		dataType: string
+		lineageTag: d2844879-f32b-4f3d-a2e3-149ff5ef3ca5
+		summarizeBy: none
+		sourceColumn: SGA Account
+		sortByColumn: Sort
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort
+		dataType: string
+		lineageTag: 08d6a6d9-dd03-42b5-bc41-d373dfa8026a
+		summarizeBy: none
+		sourceColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Selector Table - SGA Acc' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCskvScxR0lEyVIrViVZyjCk1MDAyCwAKGIEFfPLTM4tLMpOLgSLGECXBQKYJmBmcmJNYlJkKkjMFC/iXZKQWgbhmSrGxAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"SGA Account" = _t, Sort = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"SGA Account", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,9 @@
+role OthersDir_WithSalaries
+	modelPermission: read
+
+	tablePermission DIM_Country = [Country] == "Others Dir"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "Others Dir"
+
+	annotation PBI_Id = df2c8558f4dc4ecc96218ed28a8b7bde
+

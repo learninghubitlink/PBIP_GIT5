@@ -1,0 +1,85 @@
+table FACT_InventoryTarget
+	lineageTag: 20b022ee-9a70-4450-ab25-6407d60c107e
+
+	measure sm% = ```
+			DIVIDE(SUM(FACT_InventoryTarget[Slow Moving Amt]),SUM(FACT_InventoryTarget[Avg 12 Mths]),0)
+			/*for verification purposes*/
+			
+			```
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 06d2e3be-480a-4b00-bef6-d407452e7483
+
+	column ESC
+		dataType: string
+		lineageTag: b514da4e-bc6b-4c06-9c20-145bc373e5ee
+		summarizeBy: none
+		sourceColumn: ESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Category'
+		dataType: string
+		lineageTag: 96b396cb-58a3-49c5-a118-f06cd2bcd191
+		summarizeBy: none
+		sourceColumn: Product Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY
+		dataType: int64
+		formatString: 0
+		lineageTag: 19049058-b3f3-43b0-816e-319c8bdffd12
+		summarizeBy: sum
+		sourceColumn: FY
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f344d118-b0f4-47bb-a424-e7db68d42fb4
+		summarizeBy: none
+		sourceColumn: Year Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Slow Moving Amt'
+		dataType: double
+		lineageTag: 19169bf4-c460-4504-8583-7a400e2be32d
+		summarizeBy: sum
+		sourceColumn: Slow Moving Amt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Avg 12 Mths'
+		dataType: double
+		lineageTag: 67801448-43ca-4402-9649-360b69f729fa
+		summarizeBy: sum
+		sourceColumn: Avg 12 Mths
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FACT_InventoryTarget = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"1752833e-3977-423a-bce6-264afe353810" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"3bab4f99-3060-49c4-b9fc-27bcab372d7b" = #"1752833e-3977-423a-bce6-264afe353810"{[dataflowId="3bab4f99-3060-49c4-b9fc-27bcab372d7b"]}[Data],
+				    SCM_SM_Target_ = #"3bab4f99-3060-49c4-b9fc-27bcab372d7b"{[entity="SCM_SM_Target",version=""]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"SCM_SM_Target_",{{"ESC", type text}, {"Big Category", type text}, {"Product Category", type text}, {"FY", Int64.Type}, {"H1/H2", type text}, {"Month", type date}, {"Slow Moving Amt", type number}, {"Avg 12 Mths", type number}, {"Slow Moving Amt (N+1)", type number}, {"Avg 12 Mths (N+1)", type number}, {"Slow Moving Amt (H1)", type number}, {"Avg 12 Mths (H1)", type number}, {"Slow Moving Amt (H2)", type number}, {"Avg 12 Mths (H2)", type number}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Big Category", "H1/H2", "Slow Moving Amt (N+1)", "Avg 12 Mths (N+1)", "Slow Moving Amt (H1)", "Avg 12 Mths (H1)", "Slow Moving Amt (H2)", "Avg 12 Mths (H2)"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Month", "Year Month"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns","EIN","EIN-IDR",Replacer.ReplaceText,{"ESC"})
+				in
+				    #"Replaced Value"
+
+	annotation PBI_ResultType = Table
+

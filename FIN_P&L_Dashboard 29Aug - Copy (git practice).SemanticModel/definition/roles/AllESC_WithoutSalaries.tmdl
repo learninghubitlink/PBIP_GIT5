@@ -1,0 +1,11 @@
+role AllESC_WithoutSalaries
+	modelPermission: read
+
+	tablePermission DIM_Account = [Account] <> "E00000" && [Account] <> "E00100" && [Account] <> "E00110" && [Account] <> "E00200" && [Account] <> "E00010" && [Account] <> "E00020" && [Account] <> "E00030"
+
+	tablePermission FACT_Consol = [Account] <> "Salaries"
+
+	tablePermission HIER_SgaAccount = [ECAS Account L1] <> "Salaries"
+
+	annotation PBI_Id = dee4d05c5e4e4cbd921c22672ffcf404
+

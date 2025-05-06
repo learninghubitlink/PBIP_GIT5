@@ -1,0 +1,60 @@
+table 'HIER_ProfitCenter - Big Cat'
+	lineageTag: 9051161a-aa51-4433-b750-422454502470
+
+	column 'Big Cat'
+		dataType: string
+		lineageTag: 3ee22f8d-b9ee-4dfe-8062-14387613fc36
+		summarizeBy: none
+		sourceColumn: Big Cat
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month End Mtg Cat'
+		dataType: string
+		lineageTag: e2103c2c-c9a1-4507-a630-b16f844dee30
+		summarizeBy: none
+		sourceColumn: Month End Mtg Cat
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Slow moving product cat.'
+		dataType: string
+		lineageTag: eee1ea6b-0142-4646-9bd1-52ce46599c30
+		summarizeBy: none
+		sourceColumn: Slow moving product cat.
+
+		annotation SummarizationSetBy = Automatic
+
+	column MU/CONS
+		dataType: string
+		lineageTag: 7a265c30-4559-4117-91e2-96aac26044bf
+		summarizeBy: none
+		sourceColumn: MU/CONS
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter
+		dataType: string
+		lineageTag: 0d89a7f6-3144-4400-99d3-ac86603b2249
+		summarizeBy: none
+		sourceColumn: ProfitCenter
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'HIER_ProfitCenter - Big Cat' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\khiaxeng\Downloads\Product Category update (1).xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Profit center", type text}, {"MU/CONS", type text}, {"Slow moving product cat.", type text}, {"Big Cat", type text}, {"Month End Mtg Cat", type text}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Changed Type",{"Big Cat", "Month End Mtg Cat", "Slow moving product cat.", "MU/CONS", "Profit center"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Reordered Columns",{{"Profit center", "ProfitCenter"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

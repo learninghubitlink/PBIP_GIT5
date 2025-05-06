@@ -1,0 +1,39 @@
+table 'DIM_Scenario - Alias & Ordering'
+	lineageTag: 8b1f058a-d717-47ef-8fe2-3462bc75ca56
+
+	column Sort
+		dataType: int64
+		formatString: 0
+		lineageTag: d7dfd589-171a-4acb-b17a-9f681228afc9
+		summarizeBy: none
+		sourceColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scenario
+		dataType: string
+		lineageTag: 0127d10c-eba5-4578-9dc2-d31234112e36
+		summarizeBy: none
+		sourceColumn: Scenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column Alias
+		dataType: string
+		lineageTag: 9f674e0c-bea8-489c-b585-f000e1e4d8d7
+		summarizeBy: none
+		sourceColumn: Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM_Scenario - Alias & Ordering' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUXJMLilNzEEwYnWilYyAXDdPv3iIULxPYnFJfGQRUDCgKLVMITI1sQiszBikzNkASoJETMBsQwUNo7wUBefSEgW3zLzEHE2IKFiFKZhthFWFEViFGZhtDFGRjKrCGKzCHMh2ClDQAEuAlGiCBZRiYwE=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Sort = _t, Scenario = _t, Alias = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Sort", Int64.Type}, {"Scenario", type text}, {"Alias", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

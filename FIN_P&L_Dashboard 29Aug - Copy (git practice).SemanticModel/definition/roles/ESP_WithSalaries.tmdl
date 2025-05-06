@@ -1,0 +1,9 @@
+role ESP_WithSalaries
+	modelPermission: read
+
+	tablePermission DIM_Country = [Country] == "ESP"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "ESP"
+
+	annotation PBI_Id = 76749ba91e0240a3b8c19523cfca8960
+

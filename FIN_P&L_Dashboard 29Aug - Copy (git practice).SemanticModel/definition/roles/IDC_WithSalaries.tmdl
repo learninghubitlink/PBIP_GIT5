@@ -1,0 +1,9 @@
+role IDC_WithSalaries
+	modelPermission: read
+
+	tablePermission DIM_Country = [Country] == "IDC"
+
+	tablePermission 'DIM_Country - Alias & Ordering' = [Country] == "IDC"
+
+	annotation PBI_Id = 0d57ad198c114f5a86f6ba0b0b35b866
+

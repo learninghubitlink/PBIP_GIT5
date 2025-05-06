@@ -1,0 +1,49 @@
+table DIM_FIN_COA
+	lineageTag: e5d4672a-e1e5-41f0-84b5-1d8ee7c9dbcc
+
+	column Column1
+		dataType: string
+		lineageTag: 37d214c1-bcf7-482b-89e1-6cad15ff2851
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column2
+		dataType: string
+		lineageTag: d41163e2-8ed5-4069-b139-72a52197c10f
+		summarizeBy: none
+		sourceColumn: Column2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column3
+		dataType: string
+		lineageTag: 27c730c8-3c92-41b3-a8fd-031fb4749f5b
+		summarizeBy: none
+		sourceColumn: Column3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column4
+		dataType: string
+		lineageTag: b630f0e7-5669-4f4a-99de-1c6c9eadfb8c
+		summarizeBy: none
+		sourceColumn: Column4
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_FIN_COA = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    DIM_FIN_COA_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="DIM_FIN_COA",version=""]}[Data]
+				in
+				    DIM_FIN_COA_
+
+	annotation PBI_ResultType = Table
+

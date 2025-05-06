@@ -1,0 +1,41 @@
+table HIER_Country
+	lineageTag: 6e43ebd4-9667-432e-8b79-b7d193e14cfe
+
+	column Country_L1
+		dataType: string
+		lineageTag: 8bab33d3-2e57-4921-91a5-094aa2ef81a8
+		summarizeBy: none
+		sourceColumn: Country_L1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country_L0
+		dataType: string
+		lineageTag: 40b18d7f-d0d3-4d9e-93fc-015f46a3d043
+		summarizeBy: none
+		sourceColumn: Country_L0
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: ecaf3e2e-8407-4870-8320-30d97ac652d7
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	partition HIER_Country = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    HIER_Country_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="HIER_Country",version=""]}[Data]
+				in
+				    HIER_Country_
+
+	annotation PBI_ResultType = Table
+

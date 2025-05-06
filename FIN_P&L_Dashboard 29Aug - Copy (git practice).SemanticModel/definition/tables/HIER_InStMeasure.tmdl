@@ -1,0 +1,41 @@
+table HIER_InStMeasure
+	lineageTag: 96845c1f-bea1-4799-803d-527d63984580
+
+	column InStMeasure_L1
+		dataType: string
+		lineageTag: 510488a3-20ac-4a80-a142-6903fca012b2
+		summarizeBy: none
+		sourceColumn: InStMeasure_L1
+
+		annotation SummarizationSetBy = Automatic
+
+	column InStMeasure_L0
+		dataType: string
+		lineageTag: 495586bc-1077-4e6e-bcfa-80bf464defef
+		summarizeBy: none
+		sourceColumn: InStMeasure_L0
+
+		annotation SummarizationSetBy = Automatic
+
+	column InStMeasure
+		dataType: string
+		lineageTag: c9c70478-dbba-4df3-856a-b9f886c84f66
+		summarizeBy: none
+		sourceColumn: InStMeasure
+
+		annotation SummarizationSetBy = Automatic
+
+	partition HIER_InStMeasure = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c458f10d-f9d1-4e72-926d-be52a22bcba8" = Workspaces{[workspaceId="1752833e-3977-423a-bce6-264afe353810"]}[Data],
+				    #"cc042338-1a53-4af5-8dc4-59a269b1e7cc" = #"c458f10d-f9d1-4e72-926d-be52a22bcba8"{[dataflowId="cbecb17c-06ff-4c5e-8e8e-ad4564a89b88"]}[Data],
+				    HIER_InStMeasure_ = #"cc042338-1a53-4af5-8dc4-59a269b1e7cc"{[entity="HIER_InStMeasure",version=""]}[Data]
+				in
+				    HIER_InStMeasure_
+
+	annotation PBI_ResultType = Table
+
